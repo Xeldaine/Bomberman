@@ -1,28 +1,30 @@
 package graphics;
 
+import entities.Entity;
+import entities.Player;
 import utils.LogUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements Runnable {
     static final int originalTileSize = 32;
     static final int scale = 2;
     static final int columnNumber = 20;
     static final int rowNumber = 12;
-    static final int tileSize = originalTileSize * scale;
-    static final int screenHeight = rowNumber * tileSize;
-    static final int screenWidth = columnNumber * tileSize;
-    static final int FPS = 60;
-    int speed = 240 / FPS;
-
+    public static final int tileSize = originalTileSize * scale;
+    public static final int screenHeight = rowNumber * tileSize;
+    public static final int screenWidth = columnNumber * tileSize;
+    public static final int FPS = 60;
+    private static GamePanel gp;
     private final Thread gameThread;
     private final KeyHandler keyHandler;
     private Boolean isGameOver = false;
-    int x = 128;
-    int y = 128;
 
-    public GamePanel() {
+    private ArrayList<Entity> entities = new ArrayList<Entity>();
+
+    private GamePanel() {
         setPreferredSize(new Dimension(screenWidth, screenHeight));
         setBackground(Color.black);
         setDoubleBuffered(true);
@@ -30,6 +32,22 @@ public class GamePanel extends JPanel implements Runnable {
         addKeyListener(keyHandler);
         gameThread = new Thread(this);
         setFocusable(true);
+    }
+
+    public void loadEntities() {
+        entities.add(new Player(100, 100, 4));
+    }
+
+    public static GamePanel getInstance() {
+        if (gp == null) {
+            gp = new GamePanel();
+        }
+
+        return gp;
+    }
+
+    public KeyHandler getKeyHandler() {
+        return keyHandler;
     }
 
     public void startGame() {
@@ -65,10 +83,9 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     private void update(){
-        y += keyHandler.downPressed ? speed : 0;
-        y -= keyHandler.upPressed ? speed : 0;
-        x += keyHandler.rightPressed ? speed : 0;
-        x -= keyHandler.leftPressed ? speed : 0;
+        for (Entity entity : entities) {
+            entity.update();
+        }
     }
 
     @Override
@@ -77,8 +94,10 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics2D graphics2D = (Graphics2D) g;
 
-        graphics2D.setColor(Color.white);
-        graphics2D.fillRect(x, y, tileSize, tileSize);
+        for (Entity entity : entities) {
+            entity.draw(graphics2D);
+        }
+
         graphics2D.dispose();
     }
 }

@@ -8,7 +8,8 @@ public class Main {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setTitle("Bomberman");
-        GamePanel gamePanel = new GamePanel();
+        GamePanel gamePanel = GamePanel.getInstance();
+        gamePanel.loadEntities();
         gamePanel.startGame();
         window.add(gamePanel);
         window.pack();
