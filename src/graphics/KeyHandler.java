@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
     public  Boolean upPressed = false, downPressed = false, rightPressed = false, leftPressed =  false;
+
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -20,6 +21,10 @@ public class KeyHandler implements KeyListener {
             case KeyEvent.VK_RIGHT -> rightPressed = true;
             default -> {}
         }
+    }
+
+    public Boolean isNothingPressed() {
+        return !upPressed && !downPressed && !rightPressed && !leftPressed;
     }
 
     @Override

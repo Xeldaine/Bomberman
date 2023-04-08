@@ -17,10 +17,10 @@ public class GamePanel extends JPanel implements Runnable {
     public static final int screenHeight = rowNumber * tileSize;
     public static final int screenWidth = columnNumber * tileSize;
     public static final int FPS = 60;
-    private static GamePanel gp;
-    private final Thread gameThread;
-    private final KeyHandler keyHandler;
-    private Boolean isGameOver = false;
+    static GamePanel gp;
+    final Thread gameThread;
+    final KeyHandler keyHandler;
+    Boolean isGameOver = false;
 
     private ArrayList<Entity> entities = new ArrayList<Entity>();
 

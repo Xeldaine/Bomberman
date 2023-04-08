@@ -2,6 +2,8 @@ package entities;
 
 import graphics.GamePanel;
 import graphics.KeyHandler;
+import utils.enumerations.EntityDirection;
+import utils.enumerations.EntityState;
 
 import java.awt.*;
 
@@ -16,10 +18,29 @@ public class Player extends Entity{
 
     @Override
     public void update() {
-        y += keyHandler.downPressed ? speed : 0;
-        y -= keyHandler.upPressed ? speed : 0;
-        x += keyHandler.rightPressed ? speed : 0;
-        x -= keyHandler.leftPressed ? speed : 0;
+        if (keyHandler.isNothingPressed()) {
+            state = EntityState.IDLE;
+
+        } else {
+            state = EntityState.MOVING;
+
+            if (keyHandler.downPressed) {
+                y += speed;
+                direction = EntityDirection.DOWN;
+            }
+            if (keyHandler.upPressed) {
+                y -= speed;
+                direction = EntityDirection.UP;
+            }
+            if (keyHandler.leftPressed) {
+                x -= speed;
+                direction = EntityDirection.LEFT;
+            }
+            if (keyHandler.rightPressed) {
+                x += speed;
+                direction = EntityDirection.RIGHT;
+            }
+        }
     }
 
     @Override
