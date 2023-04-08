@@ -1,5 +1,7 @@
 package graphics;
 
+import utils.LogUtils;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -35,20 +37,30 @@ public class GamePanel extends JPanel implements Runnable {
     }
     @Override
     public void run() {
-        double timeBetweenFrames = Math.pow(10, 9) / FPS;
+        final double timeBetweenFrames = Math.pow(10, 9) / FPS; // in nanoseconds
         long lastTime = System.nanoTime();
-        long accumulator = 0;
+        int accumulator = 0;
+        long timer = 0;
+        int actualFPS = 0;
+
         while (!isGameOver) {
             long currentTime = System.nanoTime();
             accumulator += currentTime - lastTime;
-
+            timer += currentTime - lastTime;
+            lastTime = currentTime;
             if (accumulator >= timeBetweenFrames) {
                 accumulator -= timeBetweenFrames;
                 update();
                 repaint();
+                actualFPS ++;
             }
 
-            lastTime = currentTime;
+            //log
+            if (timer >= Math.pow(10, 9)) {
+                System.out.println(String.format("[%s] FPS: %d", LogUtils.getCurrentDateString(), actualFPS));
+                actualFPS = 0;
+                timer -= Math.pow(10, 9);
+            }
         }
     }
 
