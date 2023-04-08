@@ -10,11 +10,8 @@ public class Player extends Entity{
     KeyHandler keyHandler = null;
 
     public Player(int x, int y, int speed) {
-        super();
+        super(x, y, speed);
         this.keyHandler = GamePanel.getInstance().getKeyHandler();
-        this.x = x;
-        this.y = y;
-        this.speed = speed;
     }
 
     @Override
