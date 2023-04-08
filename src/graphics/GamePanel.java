@@ -14,7 +14,7 @@ public class GamePanel extends JPanel implements Runnable {
     static final int screenHeight = rowNumber * tileSize;
     static final int screenWidth = columnNumber * tileSize;
     static final int FPS = 60;
-    int speed = 480 / FPS;
+    int speed = 240 / FPS;
 
     private final Thread gameThread;
     private final KeyHandler keyHandler;
@@ -59,7 +59,7 @@ public class GamePanel extends JPanel implements Runnable {
             if (timer >= Math.pow(10, 9)) {
                 System.out.println(String.format("[%s] FPS: %d", LogUtils.getCurrentDateString(), actualFPS));
                 actualFPS = 0;
-                timer -= Math.pow(10, 9);
+                timer = 0;
             }
         }
     }
