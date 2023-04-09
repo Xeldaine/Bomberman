@@ -1,6 +1,7 @@
 package entities;
 
 import components.SpriteManager;
+import graphics.GamePanel;
 import utils.enumerations.EntityDirection;
 import utils.enumerations.EntityState;
 
@@ -8,7 +9,7 @@ import java.awt.*;
 
 public abstract class Entity {
     int x, y; // position of the entity (in pixels)
-    int speed = 4; //default value for speed
+    int speed = 2 * GamePanel.scale; //default value for speed
 
     SpriteManager spriteManager;
     EntityState state = EntityState.IDLE;

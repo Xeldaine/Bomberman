@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements Runnable {
     public static final int originalTileSize = 32;
-    static final int scale = 2;
+    public static final int scale = 2;
     public static final int tileSize = originalTileSize * scale;
     public static final int screenHeight = 720;
     public static final int screenWidth = 1280;
