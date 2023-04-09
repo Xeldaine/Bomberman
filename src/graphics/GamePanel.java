@@ -1,5 +1,6 @@
 package graphics;
 
+import components.Camera2D;
 import entities.Entity;
 import entities.Player;
 import tilesets.TileMap;
@@ -17,7 +18,7 @@ public class GamePanel extends JPanel implements Runnable {
     public static final int screenHeight = 720;
     public static final int screenWidth = 1280;
     public static final int FPS = 60;
-    static GamePanel gp;
+    static GamePanel instance;
     final Thread gameThread;
     final KeyHandler keyHandler;
     TileMap tileMap;
@@ -32,25 +33,35 @@ public class GamePanel extends JPanel implements Runnable {
         keyHandler = new KeyHandler();
         addKeyListener(keyHandler);
         tileMap = new TileMap();
-        tileMap.loadMap(Const.map01Path);
+        tileMap.loadMap(Const.map01Path, 0, 0);
         gameThread = new Thread(this);
         setFocusable(true);
     }
 
     public void loadEntities() {
-        entities.add(new Player(100, 100));
+        Player player = new Player(tileSize, tileSize);
+        Camera2D.getInstance().setEntity(player);
+        entities.add(player);
     }
 
     public static GamePanel getInstance() {
-        if (gp == null) {
-            gp = new GamePanel();
+        if (instance == null) {
+            instance = new GamePanel();
         }
 
-        return gp;
+        return instance;
     }
 
     public KeyHandler getKeyHandler() {
         return keyHandler;
+    }
+
+    public void setGameOver(Boolean gameOver) {
+        isGameOver = gameOver;
+    }
+
+    public Boolean getGameOver() {
+        return isGameOver;
     }
 
     public void startGame() {
@@ -98,6 +109,12 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics2D graphics2D = (Graphics2D) g;
 
+        Camera2D camera2D = Camera2D.getInstance();
+        Entity ent = camera2D.getEntity();
+        if (ent != null) {
+            tileMap.setScreenX(tileMap.getWorldX() + camera2D.getScreenX() - ent.getWorldX());
+            tileMap.setScreenY(tileMap.getWorldY() + camera2D.getScreenY() - ent.getWorldY());
+        }
         tileMap.draw(graphics2D);
 
         for (Entity entity : entities) {

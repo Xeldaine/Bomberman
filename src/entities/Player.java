@@ -1,5 +1,6 @@
 package entities;
 
+import components.Camera2D;
 import components.SpriteManager;
 import graphics.GamePanel;
 import graphics.KeyHandler;
@@ -11,18 +12,16 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
-    int framePerSection = 4;
-    KeyHandler keyHandler = null;
+    KeyHandler keyHandler;
 
     public Player(int x, int y) {
         super(x, y);
         this.keyHandler = GamePanel.getInstance().getKeyHandler();
-        setSpriteManager(new SpriteManager(GamePanel.originalTileSize, GamePanel.originalTileSize, framePerSection, Const.bombermanPath));
+        setSpriteManager(new SpriteManager(GamePanel.originalTileSize, GamePanel.originalTileSize, 4, Const.bombermanPath));
     }
 
     @Override
     public void update() {
-
         if (keyHandler.isNothingPressed()) {
             state = EntityState.IDLE;
             spriteManager.resetFrameAnimationCount();
@@ -32,19 +31,19 @@ public class Player extends Entity {
             spriteManager.updateFrameAnimationCount();
 
             if (keyHandler.downPressed) {
-                y += speed;
+                worldY += speed;
                 direction = EntityDirection.DOWN;
             }
             if (keyHandler.upPressed) {
-                y -= speed;
+                worldY -= speed;
                 direction = EntityDirection.UP;
             }
             if (keyHandler.leftPressed) {
-                x -= speed;
+                worldX -= speed;
                 direction = EntityDirection.LEFT;
             }
             if (keyHandler.rightPressed) {
-                x += speed;
+                worldX += speed;
                 direction = EntityDirection.RIGHT;
             }
         }
@@ -56,6 +55,13 @@ public class Player extends Entity {
         if (spriteManager != null) {
             int section = direction.getSection();
             BufferedImage frame = spriteManager.getFrameBySection(section);
+            int x = worldX;
+            int y = worldY;
+
+            if (Camera2D.getInstance().getEntity() == this) {
+                x = Camera2D.getInstance().getScreenX();
+                y = Camera2D.getInstance().getScreenY();
+            }
             graphics2D.drawImage(frame, x, y, tileSize, tileSize, null);
         }
     }

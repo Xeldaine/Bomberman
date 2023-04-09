@@ -6,18 +6,19 @@ import utils.enumerations.EntityDirection;
 import utils.enumerations.EntityState;
 
 import java.awt.*;
+import java.beans.PropertyChangeEvent;
 
 public abstract class Entity {
-    int x, y; // position of the entity (in pixels)
+    int worldX, worldY; // position of the entity (in pixels)
     int speed = 2 * GamePanel.scale; //default value for speed
 
     SpriteManager spriteManager;
     EntityState state = EntityState.IDLE;
     EntityDirection direction = EntityDirection.DOWN;
 
-    public Entity(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Entity(int worldX, int worldY) {
+        this.worldX = worldX;
+        this.worldY = worldY;
     }
 
     public EntityState getState() {
@@ -28,12 +29,12 @@ public abstract class Entity {
         return direction;
     }
 
-    public int getX() {
-        return x;
+    public int getWorldX() {
+        return worldX;
     }
 
-    public int getY() {
-        return y;
+    public int getWorldY() {
+        return worldY;
     }
 
     public int getSpeed() {

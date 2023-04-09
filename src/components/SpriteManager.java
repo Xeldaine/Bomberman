@@ -8,19 +8,19 @@ import java.util.ArrayList;
 public class SpriteManager {
     ArrayList<BufferedImage> spriteSheet;
     int frameWidth = 0, frameHeight = 0; // width and height for each frame
-    int framePerSection = 1; // number of frames for each section
-    int frameAnimationCount = 0; // goes from 0 to (framePerSection - 1)
-    int animationUpdateDelta = 10; // number of updates between each frame
-    int currAnimationUpdate = 0; // the current number of update
+    int frameNumber = 1; // number of frames for each section
+    int frameCounter = 0; // goes from 0 to (framePerSection - 1)
+    int spriteNumber = 10; // number of updates between each frame
+    int spriteCounter = 0; // the current number of update
 
-    public SpriteManager(int frameWidth, int frameHeight, int framePerSection, String filename) {
+    public SpriteManager(int frameWidth, int frameHeight, int frameNumber, String filename) {
         if (frameWidth > 0 && frameHeight > 0) {
             this.frameWidth = frameWidth;
             this.frameHeight = frameHeight;
         }
 
-        if (framePerSection > 0) {
-            this.framePerSection = framePerSection;
+        if (frameNumber > 0) {
+            this.frameNumber = frameNumber;
         }
 
         spriteSheet = new ArrayList<>();
@@ -42,15 +42,15 @@ public class SpriteManager {
     }
 
     public void updateFrameAnimationCount() {
-        currAnimationUpdate++;
-        if (currAnimationUpdate >= animationUpdateDelta) {
-            currAnimationUpdate -= animationUpdateDelta;
-            frameAnimationCount = (frameAnimationCount + 1) % framePerSection;
+        spriteCounter++;
+        if (spriteCounter >= spriteNumber) {
+            spriteCounter -= spriteNumber;
+            frameCounter = (frameCounter + 1) % frameNumber;
         }
     }
 
     public void resetFrameAnimationCount() {
-        frameAnimationCount = 0;
+        frameCounter = 0;
     }
 
     public BufferedImage getFrameAt(int index) {
@@ -62,6 +62,6 @@ public class SpriteManager {
     }
 
     public BufferedImage getFrameBySection(int sectionIndex){
-        return getFrameAt((framePerSection * sectionIndex) + frameAnimationCount);
+        return getFrameAt((frameNumber * sectionIndex) + frameCounter);
     }
 }

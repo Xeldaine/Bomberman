@@ -13,8 +13,16 @@ import java.util.List;
 
 public class TileMap {
     ArrayList<Tile> tilemap;
+    int worldX, worldY;
 
-    public void loadMap(String filepath) {
+    int screenX, screenY;
+
+    public void loadMap(String filepath, int worldX, int worldY) {
+        this.worldX = worldX;
+        this.worldY = worldY;
+        this.screenX = worldX;
+        this.screenY = worldY;
+
         int[][] tilemapRaw;
 
         try {
@@ -49,9 +57,43 @@ public class TileMap {
         }
     }
 
+    public int getWorldX() {
+        return worldX;
+    }
+
+    public int getWorldY() {
+        return worldY;
+    }
+
+    public void setWorldX(int worldX) {
+        this.worldX = worldX;
+    }
+
+    public void setWorldY(int worldY) {
+        this.worldY = worldY;
+    }
+
+    public int getScreenX() {
+        return screenX;
+    }
+
+    public void setScreenX(int screenX) {
+        this.screenX = screenX;
+    }
+
+    public int getScreenY() {
+        return screenY;
+    }
+
+    public void setScreenY(int screenY) {
+        this.screenY = screenY;
+    }
+
     public void draw(Graphics2D graphics2D) {
         if (tilemap != null) {
             for (Tile tile : tilemap) {
+                tile.setWorldX(screenX);
+                tile.setWorldY(screenY);
                 tile.draw(graphics2D);
             }
         }
