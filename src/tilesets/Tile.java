@@ -20,8 +20,6 @@ public class Tile {
         spriteManager = new SpriteManager(tileSize, tileSize, 1, type.getPath());
     }
 
-
-
     public void draw(Graphics2D graphics2D) {
         if (spriteManager != null) {
             int tileSize = GamePanel.tileSize;

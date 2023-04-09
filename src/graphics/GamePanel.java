@@ -23,7 +23,7 @@ public class GamePanel extends JPanel implements Runnable {
     TileMap tileMap;
     Boolean isGameOver = false;
 
-    private ArrayList<Entity> entities = new ArrayList<Entity>();
+    private ArrayList<Entity> entities = new ArrayList<>();
 
     private GamePanel() {
         setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -56,6 +56,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void startGame() {
         gameThread.start();
     }
+
     @Override
     public void run() {
         final double timeBetweenFrames = Math.pow(10, 9) / FPS; // in nanoseconds
