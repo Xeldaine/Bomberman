@@ -1,7 +1,6 @@
 package entities;
 
-
-import entities.components.SpriteManager;
+import components.SpriteManager;
 import utils.enumerations.EntityDirection;
 import utils.enumerations.EntityState;
 

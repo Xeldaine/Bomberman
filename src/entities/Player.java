@@ -1,6 +1,6 @@
 package entities;
 
-import entities.components.SpriteManager;
+import components.SpriteManager;
 import graphics.GamePanel;
 import graphics.KeyHandler;
 import utils.Const;

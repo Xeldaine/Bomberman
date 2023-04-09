@@ -1,4 +1,4 @@
-package entities.components;
+package components;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

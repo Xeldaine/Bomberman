@@ -2,6 +2,8 @@ package graphics;
 
 import entities.Entity;
 import entities.Player;
+import tilesets.TileMap;
+import utils.Const;
 import utils.LogUtils;
 
 import javax.swing.*;
@@ -11,15 +13,14 @@ import java.util.ArrayList;
 public class GamePanel extends JPanel implements Runnable {
     public static final int originalTileSize = 32;
     static final int scale = 2;
-    static final int columnNumber = 20;
-    static final int rowNumber = 12;
     public static final int tileSize = originalTileSize * scale;
-    public static final int screenHeight = rowNumber * tileSize;
-    public static final int screenWidth = columnNumber * tileSize;
+    public static final int screenHeight = 720;
+    public static final int screenWidth = 1280;
     public static final int FPS = 60;
     static GamePanel gp;
     final Thread gameThread;
     final KeyHandler keyHandler;
+    TileMap tileMap;
     Boolean isGameOver = false;
 
     private ArrayList<Entity> entities = new ArrayList<Entity>();
@@ -30,6 +31,8 @@ public class GamePanel extends JPanel implements Runnable {
         setDoubleBuffered(true);
         keyHandler = new KeyHandler();
         addKeyListener(keyHandler);
+        tileMap = new TileMap();
+        tileMap.loadMap(Const.map01Path);
         gameThread = new Thread(this);
         setFocusable(true);
     }
@@ -70,7 +73,7 @@ public class GamePanel extends JPanel implements Runnable {
                 accumulator -= timeBetweenFrames;
                 update();
                 repaint();
-                actualFPS ++;
+                actualFPS++;
             }
 
             //log
@@ -93,6 +96,8 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
 
         Graphics2D graphics2D = (Graphics2D) g;
+
+        tileMap.draw(graphics2D);
 
         for (Entity entity : entities) {
             entity.draw(graphics2D);
