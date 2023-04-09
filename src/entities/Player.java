@@ -1,28 +1,35 @@
 package entities;
 
+import entities.components.SpriteManager;
 import graphics.GamePanel;
 import graphics.KeyHandler;
+import utils.Const;
 import utils.enumerations.EntityDirection;
 import utils.enumerations.EntityState;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
-public class Player extends Entity{
-
+public class Player extends Entity {
+    int framePerSection = 4;
     KeyHandler keyHandler = null;
 
     public Player(int x, int y, int speed) {
         super(x, y, speed);
         this.keyHandler = GamePanel.getInstance().getKeyHandler();
+        setSpriteManager(new SpriteManager(GamePanel.originalTileSize, GamePanel.originalTileSize, framePerSection, Const.bombermanPath));
     }
 
     @Override
     public void update() {
+
         if (keyHandler.isNothingPressed()) {
             state = EntityState.IDLE;
+            spriteManager.resetFrameAnimationCount();
 
         } else {
             state = EntityState.MOVING;
+            spriteManager.updateFrameAnimationCount();
 
             if (keyHandler.downPressed) {
                 y += speed;
@@ -46,7 +53,10 @@ public class Player extends Entity{
     @Override
     public void draw(Graphics2D graphics2D) {
         int tileSize = GamePanel.tileSize;
-        graphics2D.setColor(Color.white);
-        graphics2D.fillRect(x, y, tileSize, tileSize);
+        if (spriteManager != null) {
+            int section = direction.getSection();
+            BufferedImage frame = spriteManager.getFrameBySection(section);
+            graphics2D.drawImage(frame, x, y, tileSize, tileSize, null);
+        }
     }
 }

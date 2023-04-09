@@ -9,7 +9,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements Runnable {
-    static final int originalTileSize = 32;
+    public static final int originalTileSize = 32;
     static final int scale = 2;
     static final int columnNumber = 20;
     static final int rowNumber = 12;

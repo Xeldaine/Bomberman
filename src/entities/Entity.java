@@ -1,6 +1,7 @@
 package entities;
 
 
+import entities.components.SpriteManager;
 import utils.enumerations.EntityDirection;
 import utils.enumerations.EntityState;
 
@@ -9,6 +10,7 @@ import java.awt.*;
 public abstract class Entity {
     int x, y; // position of the entity (in pixels)
     int speed;
+    SpriteManager spriteManager;
     EntityState state = EntityState.IDLE;
     EntityDirection direction = EntityDirection.DOWN;
 
@@ -24,6 +26,14 @@ public abstract class Entity {
 
     public EntityDirection getDirection() {
         return direction;
+    }
+
+    public void setSpriteManager(SpriteManager spriteManager) {
+        this.spriteManager = spriteManager;
+    }
+
+    public SpriteManager getSpriteManager() {
+        return spriteManager;
     }
 
     public abstract void update();
