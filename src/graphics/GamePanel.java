@@ -35,7 +35,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void loadEntities() {
-        entities.add(new Player(100, 100, 4));
+        entities.add(new Player(100, 100));
     }
 
     public static GamePanel getInstance() {

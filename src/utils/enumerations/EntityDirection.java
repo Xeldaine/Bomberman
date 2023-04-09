@@ -4,7 +4,7 @@ public enum EntityDirection {
     DOWN, UP, RIGHT, LEFT;
 
     public int getSection() {
-        int section = -1;
+        int section = 0;
         switch (this) {
             case DOWN -> section = 0;
             case UP ->  section = 1;

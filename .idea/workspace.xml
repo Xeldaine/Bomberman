@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="984ca510-826f-4715-aed2-4abfc8cb419e" name="Changes" comment="added assets and refactor">
-      <change afterPath="$PROJECT_DIR$/src/entities/components/SpriteManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/Const.java" afterDir="false" />
+    <list default="true" id="984ca510-826f-4715-aed2-4abfc8cb419e" name="Changes" comment="added sprite manager and player animation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entities/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Entity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/components/SpriteManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/components/SpriteManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/graphics/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/GamePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/enumerations/EntityDirection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/enumerations/EntityDirection.java" afterDir="false" />
     </list>
@@ -114,7 +113,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681039926469</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="added sprite manager and player animation">
+      <created>1681047050896</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1681047050896</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -134,7 +140,8 @@
     <MESSAGE value="fix" />
     <MESSAGE value="refactor" />
     <MESSAGE value="added assets and refactor" />
-    <option name="LAST_COMMIT_MESSAGE" value="added assets and refactor" />
+    <MESSAGE value="added sprite manager and player animation" />
+    <option name="LAST_COMMIT_MESSAGE" value="added sprite manager and player animation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

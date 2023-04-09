@@ -7,15 +7,17 @@ import java.util.ArrayList;
 
 public class SpriteManager {
     ArrayList<BufferedImage> spriteSheet;
-    int frameWidth, frameHeight; // width and height for each frame
+    int frameWidth = 0, frameHeight = 0; // width and height for each frame
     int framePerSection = 1; // number of frames for each section
     int frameAnimationCount = 0; // goes from 0 to (framePerSection - 1)
     int animationUpdateDelta = 10; // number of updates between each frame
     int currAnimationUpdate = 0; // the current number of update
 
     public SpriteManager(int frameWidth, int frameHeight, int framePerSection, String filename) {
-        this.frameWidth = frameWidth;
-        this.frameHeight = frameHeight;
+        if (frameWidth > 0 && frameHeight > 0) {
+            this.frameWidth = frameWidth;
+            this.frameHeight = frameHeight;
+        }
 
         if (framePerSection > 0) {
             this.framePerSection = framePerSection;
@@ -36,7 +38,6 @@ public class SpriteManager {
 
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException(e);
         }
     }
 
@@ -53,7 +54,11 @@ public class SpriteManager {
     }
 
     public BufferedImage getFrameAt(int index) {
-        return spriteSheet.get(index);
+        if (index < spriteSheet.size()) {
+            return spriteSheet.get(index);
+        }
+
+        return null;
     }
 
     public BufferedImage getFrameBySection(int sectionIndex){

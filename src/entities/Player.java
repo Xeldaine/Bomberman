@@ -14,8 +14,8 @@ public class Player extends Entity {
     int framePerSection = 4;
     KeyHandler keyHandler = null;
 
-    public Player(int x, int y, int speed) {
-        super(x, y, speed);
+    public Player(int x, int y) {
+        super(x, y);
         this.keyHandler = GamePanel.getInstance().getKeyHandler();
         setSpriteManager(new SpriteManager(GamePanel.originalTileSize, GamePanel.originalTileSize, framePerSection, Const.bombermanPath));
     }
