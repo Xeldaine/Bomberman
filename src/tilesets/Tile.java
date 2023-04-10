@@ -1,6 +1,7 @@
 package tilesets;
 
-import components.SpriteManager;
+import components.Collider2D;
+import components.Sprite2D;
 import graphics.GamePanel;
 import utils.enumerations.TileType;
 
@@ -12,15 +13,20 @@ public class Tile {
     private int worldX = 0, worldY = 0;
     private int screenX = 0, screenY = 0;
 
-    TileType type;
-    SpriteManager spriteManager;
+    private Collider2D collider2D;
+
+    private TileType type;
+    private Sprite2D sprite2D;
 
     public Tile(int localX, int localY, TileType type) {
         this.localX = localX;
         this.localY = localY;
         this.type = type;
-        int tileSize = GamePanel.originalTileSize;
-        spriteManager = new SpriteManager(tileSize, tileSize, 1, type.getPath());
+        sprite2D = new Sprite2D(GamePanel.originalTileSize, GamePanel.originalTileSize, 1, type.getPath());
+
+        if (type == TileType.WALL || type == TileType.BRICK) {
+            collider2D = new Collider2D(0, 0, GamePanel.tileSize, GamePanel.tileSize, this);
+        }
     }
 
     public int getWorldX() {
@@ -71,10 +77,14 @@ public class Tile {
         this.localY = localY;
     }
 
+    public Collider2D getCollider2D() {
+        return collider2D;
+    }
+
     public void draw(Graphics2D graphics2D) {
-        if (spriteManager != null) {
+        if (sprite2D != null) {
             int tileSize = GamePanel.tileSize;
-            BufferedImage image = spriteManager.getFrameAt(0);
+            BufferedImage image = sprite2D.getFrameAt(0);
             graphics2D.drawImage(image, screenX + worldX + localX, screenY + worldY + localY, tileSize, tileSize, null);
         }
     }

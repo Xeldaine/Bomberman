@@ -12,10 +12,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TileMap {
-    ArrayList<Tile> tilemap;
-    int worldX, worldY;
-
-    int screenX, screenY;
+    private Tile[][] tilemap;
+    private int worldX, worldY;
+    private int screenX, screenY;
 
     public void loadMap(String filepath, int worldX, int worldY) {
         this.worldX = worldX;
@@ -38,18 +37,20 @@ public class TileMap {
                 tilemapRaw[i] = lineInt;
             }
 
-            tilemap = new ArrayList<>();
+            tilemap = new Tile[lines.size()][];
             int tileSize = GamePanel.tileSize;
 
-            for (int j = 0; j < tilemapRaw.length; j++) {
+            for (int j = 0; j < lines.size(); j++) {
                 int[] line = tilemapRaw[j];
+                Tile[] tileLine = new Tile[line.length];
                 for (int i = 0; i < line.length; i++) {
                     TileType type = TileType.rawValue(line[i]);
                     if (type != null) {
                         Tile tile = new Tile(i * tileSize, j * tileSize, type);
-                        tilemap.add(tile);
+                        tileLine[i] = tile;
                     }
                 }
+                tilemap[j] = tileLine;
             }
 
         } catch (Exception e) {
@@ -89,14 +90,32 @@ public class TileMap {
         this.screenY = screenY;
     }
 
+    public Tile getTileByWorldPosition(int worldX, int worldY) {
+        int localX = worldX - this.worldX;
+        int localY = worldY - this.worldY;
+        int i = localX / GamePanel.tileSize;
+        int j = localY / GamePanel.tileSize;
+
+        if (j >= 0 && j < tilemap.length) {
+            Tile[] line = tilemap[j];
+            if (i >= 0 && i < line.length) {
+                return line[i];
+            }
+        }
+
+        return null;
+    }
+
     public void draw(Graphics2D graphics2D) {
         if (tilemap != null) {
-            for (Tile tile : tilemap) {
-                tile.setWorldX(worldX);
-                tile.setWorldY(worldY);
-                tile.setScreenX(screenX);
-                tile.setScreenY(screenY);
-                tile.draw(graphics2D);
+            for (Tile[] line: tilemap) {
+                for (Tile tile: line) {
+                    tile.setWorldX(worldX);
+                    tile.setWorldY(worldY);
+                    tile.setScreenX(screenX);
+                    tile.setScreenY(screenY);
+                    tile.draw(graphics2D);
+                }
             }
         }
     }

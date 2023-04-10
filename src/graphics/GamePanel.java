@@ -1,11 +1,15 @@
 package graphics;
 
+import components.Area2D;
 import components.Camera2D;
+import components.Collider2D;
 import entities.Entity;
 import entities.Player;
+import tilesets.Tile;
 import tilesets.TileMap;
 import utils.Const;
 import utils.LogUtils;
+import utils.enumerations.EntityDirection;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,11 +23,10 @@ public class GamePanel extends JPanel implements Runnable {
     public static final int screenWidth = 1280;
     public static final int FPS = 60;
     private static GamePanel instance;
-    private final Thread gameThread;
+    private Thread gameThread;
     private final KeyHandler keyHandler;
     private TileMap tileMap;
     private Boolean isGameOver = false;
-
     private ArrayList<Entity> entities = new ArrayList<>();
 
     private GamePanel() {
@@ -34,7 +37,6 @@ public class GamePanel extends JPanel implements Runnable {
         addKeyListener(keyHandler);
         tileMap = new TileMap();
         tileMap.loadMap(Const.map01Path, 0, 0);
-        gameThread = new Thread(this);
         setFocusable(true);
     }
 
@@ -65,6 +67,10 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void startGame() {
+        if (gameThread != null) {
+            gameThread.interrupt();
+        }
+        gameThread = new Thread(this);
         gameThread.start();
     }
 
@@ -101,6 +107,31 @@ public class GamePanel extends JPanel implements Runnable {
         for (Entity entity : entities) {
             entity.update();
         }
+    }
+
+    public Collider2D checkCollision(Entity entity, int worldX, int worldY, EntityDirection direction, int speed){
+        int nextX = worldX;
+        int nextY = worldY;
+
+        switch (direction){
+            case DOWN -> nextY += (tileSize + speed);
+            case UP -> nextY -= speed;
+            case LEFT -> nextX -= speed;
+            case RIGHT -> nextX += (tileSize + speed);
+        }
+
+        Tile tile = tileMap.getTileByWorldPosition(nextX, nextY);
+
+        if (tile != null) {
+            Collider2D collider2D = tile.getCollider2D();
+            Area2D area2D = entity.getArea2D();
+            if (collider2D != null && area2D != null) {
+                if (area2D.intersects(collider2D)) {
+                    return collider2D;
+                }
+            }
+        }
+        return null;
     }
 
     @Override

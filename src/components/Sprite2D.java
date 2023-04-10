@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 
-public class SpriteManager {
+public class Sprite2D {
     ArrayList<BufferedImage> spriteSheet;
     int frameWidth = 0, frameHeight = 0; // width and height for each frame
     int frameNumber = 1; // number of frames for each section
@@ -13,7 +13,7 @@ public class SpriteManager {
     int spriteNumber = 10; // number of updates between each frame
     int spriteCounter = 0; // the current number of update
 
-    public SpriteManager(int frameWidth, int frameHeight, int frameNumber, String filename) {
+    public Sprite2D(int frameWidth, int frameHeight, int frameNumber, String filename) {
         if (frameWidth > 0 && frameHeight > 0) {
             this.frameWidth = frameWidth;
             this.frameHeight = frameHeight;

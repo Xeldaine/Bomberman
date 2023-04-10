@@ -1,20 +1,22 @@
 package entities;
 
-import components.SpriteManager;
+import components.Area2D;
+import components.Collider2D;
+import components.Sprite2D;
 import graphics.GamePanel;
 import utils.enumerations.EntityDirection;
 import utils.enumerations.EntityState;
 
 import java.awt.*;
-import java.beans.PropertyChangeEvent;
 
 public abstract class Entity {
-    int worldX, worldY; // position of the entity (in pixels)
-    int speed = 2 * GamePanel.scale; //default value for speed
-
-    SpriteManager spriteManager;
-    EntityState state = EntityState.IDLE;
-    EntityDirection direction = EntityDirection.DOWN;
+    protected int worldX, worldY; // position of the entity (in pixels)
+    protected int speed = 2 * GamePanel.scale; //default value for speed
+    protected Sprite2D sprite2D;
+    protected Area2D area2D;
+    protected Collider2D collider2D;
+    protected EntityState state = EntityState.IDLE;
+    protected EntityDirection direction = EntityDirection.DOWN;
 
     public Entity(int worldX, int worldY) {
         this.worldX = worldX;
@@ -45,15 +47,33 @@ public abstract class Entity {
         this.speed = speed;
     }
 
-    public void setSpriteManager(SpriteManager spriteManager) {
-        this.spriteManager = spriteManager;
+    public void setSprite2D(Sprite2D sprite2D) {
+        this.sprite2D = sprite2D;
     }
 
-    public SpriteManager getSpriteManager() {
-        return spriteManager;
+    public Sprite2D getSprite2D() {
+        return sprite2D;
+    }
+
+    public Collider2D getCollider2D() {
+        return collider2D;
+    }
+
+    public void setCollider2D(Collider2D collider2D) {
+        this.collider2D = collider2D;
+    }
+
+    public Area2D getArea2D() {
+        return area2D;
+    }
+
+    public void setArea2D(Area2D area2D) {
+        this.area2D = area2D;
     }
 
     public abstract void update();
 
     public abstract void draw(Graphics2D graphics2D);
+
+    public abstract void onCollisionEntered(Collider2D collider2D);
 }
