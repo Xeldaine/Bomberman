@@ -10,6 +10,8 @@ import java.awt.image.BufferedImage;
 public class Tile {
     private int localX, localY;
     private int worldX = 0, worldY = 0;
+    private int screenX = 0, screenY = 0;
+
     TileType type;
     SpriteManager spriteManager;
 
@@ -37,6 +39,22 @@ public class Tile {
         this.worldY = worldY;
     }
 
+    public int getScreenX() {
+        return screenX;
+    }
+
+    public void setScreenX(int screenX) {
+        this.screenX = screenX;
+    }
+
+    public int getScreenY() {
+        return screenY;
+    }
+
+    public void setScreenY(int screenY) {
+        this.screenY = screenY;
+    }
+
     public int getLocalX() {
         return localX;
     }
@@ -57,7 +75,7 @@ public class Tile {
         if (spriteManager != null) {
             int tileSize = GamePanel.tileSize;
             BufferedImage image = spriteManager.getFrameAt(0);
-            graphics2D.drawImage(image, localX + worldX, localY + worldY, tileSize, tileSize, null);
+            graphics2D.drawImage(image, screenX + worldX + localX, screenY + worldY + localY, tileSize, tileSize, null);
         }
     }
 }

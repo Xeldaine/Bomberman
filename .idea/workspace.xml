@@ -7,6 +7,9 @@
     <list default="true" id="984ca510-826f-4715-aed2-4abfc8cb419e" name="Changes" comment="implemented camera movement">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphics/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tilesets/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tilesets/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tilesets/TileMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tilesets/TileMap.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,7 +174,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681084746348</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="implemented camera movement">
+      <created>1681085690526</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1681085690526</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

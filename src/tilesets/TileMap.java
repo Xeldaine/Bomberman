@@ -92,8 +92,10 @@ public class TileMap {
     public void draw(Graphics2D graphics2D) {
         if (tilemap != null) {
             for (Tile tile : tilemap) {
-                tile.setWorldX(screenX);
-                tile.setWorldY(screenY);
+                tile.setWorldX(worldX);
+                tile.setWorldY(worldY);
+                tile.setScreenX(screenX);
+                tile.setScreenY(screenY);
                 tile.draw(graphics2D);
             }
         }

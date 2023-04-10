@@ -112,8 +112,8 @@ public class GamePanel extends JPanel implements Runnable {
         Camera2D camera2D = Camera2D.getInstance();
         Entity ent = camera2D.getEntity();
         if (ent != null) {
-            tileMap.setScreenX(tileMap.getWorldX() + camera2D.getScreenX() - ent.getWorldX());
-            tileMap.setScreenY(tileMap.getWorldY() + camera2D.getScreenY() - ent.getWorldY());
+            tileMap.setScreenX(camera2D.getScreenX() - ent.getWorldX());
+            tileMap.setScreenY(camera2D.getScreenY() - ent.getWorldY());
         }
         tileMap.draw(graphics2D);
 
