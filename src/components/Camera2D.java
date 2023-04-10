@@ -22,6 +22,24 @@ public class Camera2D {
         return screenY;
     }
 
+    public int getOffsetX() {
+        int x = 0;
+        if (entity != null) {
+            x = entity.getWorldX();
+        }
+
+        return screenX - x;
+    }
+
+    public int getOffsetY() {
+        int y = 0;
+        if (entity != null) {
+            y = entity.getWorldY();
+        }
+
+        return screenY - y;
+    }
+
     public void setEntity(Entity entity) {
         this.entity = entity;
     }

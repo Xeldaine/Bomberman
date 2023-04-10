@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="984ca510-826f-4715-aed2-4abfc8cb419e" name="Changes" comment="implemented camera movement">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="984ca510-826f-4715-aed2-4abfc8cb419e" name="Changes" comment="refactor">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Camera2D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Camera2D.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/graphics/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tilesets/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tilesets/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tilesets/TileMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tilesets/TileMap.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,7 +180,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681085690526</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="refactor">
+      <created>1681086425023</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1681086425023</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -202,9 +208,9 @@
     <MESSAGE value="added assets and refactor" />
     <MESSAGE value="added sprite manager and player animation" />
     <MESSAGE value="tileset and maps" />
-    <MESSAGE value="refactor" />
     <MESSAGE value="implemented camera movement" />
-    <option name="LAST_COMMIT_MESSAGE" value="implemented camera movement" />
+    <MESSAGE value="refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

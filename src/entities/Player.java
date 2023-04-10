@@ -12,7 +12,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
-    KeyHandler keyHandler;
+    private KeyHandler keyHandler;
+    private Boolean canMove = true;
 
     public Player(int x, int y) {
         super(x, y);
@@ -22,7 +23,8 @@ public class Player extends Entity {
 
     @Override
     public void update() {
-        if (keyHandler.isNothingPressed()) {
+
+        if (keyHandler.isNothingPressed() || !canMove) {
             state = EntityState.IDLE;
             spriteManager.resetFrameAnimationCount();
 
@@ -49,18 +51,29 @@ public class Player extends Entity {
         }
     }
 
+    public void setCanMove(Boolean canMove) {
+        this.canMove = canMove;
+    }
+
+    public Boolean canMove() {
+        return canMove;
+    }
+
     @Override
     public void draw(Graphics2D graphics2D) {
         int tileSize = GamePanel.tileSize;
         if (spriteManager != null) {
             int section = direction.getSection();
             BufferedImage frame = spriteManager.getFrameBySection(section);
-            int x = worldX;
-            int y = worldY;
+            int x = 0;
+            int y = 0;
 
             if (Camera2D.getInstance().getEntity() == this) {
                 x = Camera2D.getInstance().getScreenX();
                 y = Camera2D.getInstance().getScreenY();
+            } else {
+                x = worldX + Camera2D.getInstance().getOffsetX();
+                y = worldY + Camera2D.getInstance().getOffsetY();
             }
             graphics2D.drawImage(frame, x, y, tileSize, tileSize, null);
         }

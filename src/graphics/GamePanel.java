@@ -18,11 +18,11 @@ public class GamePanel extends JPanel implements Runnable {
     public static final int screenHeight = 720;
     public static final int screenWidth = 1280;
     public static final int FPS = 60;
-    static GamePanel instance;
-    final Thread gameThread;
-    final KeyHandler keyHandler;
-    TileMap tileMap;
-    Boolean isGameOver = false;
+    private static GamePanel instance;
+    private final Thread gameThread;
+    private final KeyHandler keyHandler;
+    private TileMap tileMap;
+    private Boolean isGameOver = false;
 
     private ArrayList<Entity> entities = new ArrayList<>();
 
@@ -106,15 +106,10 @@ public class GamePanel extends JPanel implements Runnable {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         Graphics2D graphics2D = (Graphics2D) g;
-
         Camera2D camera2D = Camera2D.getInstance();
-        Entity ent = camera2D.getEntity();
-        if (ent != null) {
-            tileMap.setScreenX(camera2D.getScreenX() - ent.getWorldX());
-            tileMap.setScreenY(camera2D.getScreenY() - ent.getWorldY());
-        }
+        tileMap.setScreenX(camera2D.getOffsetX());
+        tileMap.setScreenY(camera2D.getOffsetY());
         tileMap.draw(graphics2D);
 
         for (Entity entity : entities) {
