@@ -1,7 +1,7 @@
-package components;
+package model.components;
 
-import entities.Entity;
-import graphics.GamePanel;
+import model.Entity;
+import UI.GamePanel;
 
 public class Camera2D {
     private static Camera2D instance;

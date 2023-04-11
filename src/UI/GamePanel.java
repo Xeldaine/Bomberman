@@ -1,11 +1,11 @@
-package graphics;
+package UI;
 
-import components.Area2D;
-import components.Camera2D;
-import entities.Entity;
-import entities.Player;
-import entities.tilemap.Tile;
-import entities.tilemap.TileMap;
+import model.components.Area2D;
+import model.components.Camera2D;
+import model.Entity;
+import model.entities.Player;
+import model.entities.Tile;
+import model.entities.TileMap;
 import utils.Const;
 import utils.LogUtils;
 import utils.enumerations.EntityDirection;

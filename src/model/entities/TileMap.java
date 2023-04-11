@@ -1,7 +1,7 @@
-package entities.tilemap;
+package model.entities;
 
-import entities.Entity;
-import graphics.GamePanel;
+import model.Entity;
+import UI.GamePanel;
 import utils.enumerations.TileType;
 
 import java.awt.*;

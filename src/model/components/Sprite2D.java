@@ -1,4 +1,4 @@
-package components;
+package model.components;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -9,7 +9,7 @@ public class Sprite2D {
     ArrayList<BufferedImage> spriteSheet;
     int frameWidth = 0, frameHeight = 0; // width and height for each frame
     int frameNumber = 1; // number of frames for each section
-    int frameCounter = 0; // goes from 0 to (framePerSection - 1)
+    int frameCounter = 0; // the current number of frame
     int spriteNumber = 10; // number of updates between each frame
     int spriteCounter = 0; // the current number of update
 
@@ -41,7 +41,7 @@ public class Sprite2D {
         }
     }
 
-    public void updateFrameAnimationCount() {
+    public void updateFrameCounter() {
         spriteCounter++;
         if (spriteCounter >= spriteNumber) {
             spriteCounter -= spriteNumber;
@@ -49,7 +49,7 @@ public class Sprite2D {
         }
     }
 
-    public void resetFrameAnimationCount() {
+    public void resetFrameCounter() {
         frameCounter = 0;
     }
 

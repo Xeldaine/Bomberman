@@ -4,13 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="984ca510-826f-4715-aed2-4abfc8cb419e" name="Changes" comment="collision wip">
-      <change afterPath="$PROJECT_DIR$/src/utils/Config.java" afterDir="false" />
+    <list default="true" id="984ca510-826f-4715-aed2-4abfc8cb419e" name="Changes" comment="centered method draw in Entity">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/tilemap/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/tilemap/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/Const.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Const.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Area2D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/components/Area2D.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Camera2D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/components/Camera2D.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Sprite2D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/components/Sprite2D.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/tilemap/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/tilemap/TileMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/TileMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphics/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphics/KeyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/KeyHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -217,7 +222,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681210392039</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="centered method draw in Entity">
+      <created>1681211858772</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1681211858772</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -244,7 +256,8 @@
     <MESSAGE value="huge refactor + collision wip" />
     <MESSAGE value="refactor + collision wip" />
     <MESSAGE value="collision wip" />
-    <option name="LAST_COMMIT_MESSAGE" value="collision wip" />
+    <MESSAGE value="centered method draw in Entity" />
+    <option name="LAST_COMMIT_MESSAGE" value="centered method draw in Entity" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -258,7 +271,7 @@
           <option name="timeStamp" value="3" />
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/components/Area2D.java</url>
+          <url>file://$PROJECT_DIR$/src/model/components/Area2D.java</url>
           <line>21</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>

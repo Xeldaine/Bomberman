@@ -1,9 +1,9 @@
-package entities.tilemap;
+package model.entities;
 
-import components.Area2D;
-import components.Sprite2D;
-import entities.Entity;
-import graphics.GamePanel;
+import model.components.Area2D;
+import model.components.Sprite2D;
+import model.Entity;
+import UI.GamePanel;
 import utils.enumerations.TileType;
 
 public class Tile extends Entity {

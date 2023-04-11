@@ -1,9 +1,10 @@
-package entities;
+package model.entities;
 
-import components.Area2D;
-import components.Sprite2D;
-import graphics.GamePanel;
-import graphics.KeyHandler;
+import model.components.Area2D;
+import model.components.Sprite2D;
+import UI.GamePanel;
+import UI.KeyHandler;
+import model.Entity;
 import utils.Const;
 import utils.enumerations.EntityDirection;
 import utils.enumerations.EntityState;
@@ -22,11 +23,11 @@ public class Player extends Entity {
     public void update() {
         if (keyHandler.isNothingPressed()) {
             state = EntityState.IDLE;
-            sprite2D.resetFrameAnimationCount();
+            sprite2D.resetFrameCounter();
 
         } else {
             state = EntityState.MOVING;
-            sprite2D.updateFrameAnimationCount();
+            sprite2D.updateFrameCounter();
 
             if (keyHandler.downPressed) {
                 direction = EntityDirection.DOWN;

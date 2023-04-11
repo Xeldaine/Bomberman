@@ -1,9 +1,9 @@
-package entities;
+package model;
 
-import components.Area2D;
-import components.Camera2D;
-import components.Sprite2D;
-import graphics.GamePanel;
+import model.components.Area2D;
+import model.components.Camera2D;
+import model.components.Sprite2D;
+import UI.GamePanel;
 import utils.Config;
 import utils.Const;
 import utils.enumerations.EntityDirection;

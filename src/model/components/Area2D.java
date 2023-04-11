@@ -1,6 +1,6 @@
-package components;
+package model.components;
 
-import entities.Entity;
+import model.Entity;
 import java.awt.*;
 
 public class Area2D extends Rectangle {
