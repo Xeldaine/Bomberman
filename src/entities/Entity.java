@@ -1,12 +1,16 @@
 package entities;
 
 import components.Area2D;
+import components.Camera2D;
 import components.Sprite2D;
 import graphics.GamePanel;
+import utils.Config;
+import utils.Const;
 import utils.enumerations.EntityDirection;
 import utils.enumerations.EntityState;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public abstract class Entity {
     protected Entity parent;
@@ -99,5 +103,21 @@ public abstract class Entity {
 
     public abstract void update();
 
-    public abstract void draw(Graphics2D graphics2D);
+    public void draw(Graphics2D graphics2D) {
+        if (sprite2D != null && area2D != null) {
+            int tileSize = GamePanel.tileSize;
+            int section = direction.getSection();
+            BufferedImage frame = sprite2D.getFrameBySection(section);
+
+            int screenX = this.getWorldX() + Camera2D.getInstance().getOffsetX();
+            int screenY = this.getWorldY() + Camera2D.getInstance().getOffsetY();
+
+            graphics2D.drawImage(frame, screenX, screenY, tileSize, tileSize, null);
+
+            if (Config.showCollisions) {
+                graphics2D.setColor(Const.transparentRed);
+                graphics2D.fillRect(screenX + area2D.x, screenY + area2D.y, area2D.width, area2D.height);
+            }
+        }
+    }
 }

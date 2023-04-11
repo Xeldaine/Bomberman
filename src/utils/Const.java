@@ -1,5 +1,7 @@
 package utils;
 
+import java.awt.*;
+
 public abstract class Const {
     public static final String baseSpritePath = "res/sprites";
     public static final String baseMapsPath = "res/maps";
@@ -12,4 +14,7 @@ public abstract class Const {
 
     // maps
     public static final String map01Path = baseMapsPath + "/map01.txt";
+
+    // colors
+    public static final Color transparentRed = new Color(1, 0, 0, 0.5f);
 }

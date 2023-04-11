@@ -1,15 +1,12 @@
 package entities;
 
 import components.Area2D;
-import components.Camera2D;
 import components.Sprite2D;
 import graphics.GamePanel;
 import graphics.KeyHandler;
 import utils.Const;
 import utils.enumerations.EntityDirection;
 import utils.enumerations.EntityState;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
     private KeyHandler keyHandler;
@@ -56,22 +53,6 @@ public class Player extends Entity {
                 case LEFT -> x -= speed;
                 case RIGHT -> x += speed;
             }
-        }
-    }
-
-    @Override
-    public void draw(Graphics2D graphics2D) {
-        int tileSize = GamePanel.tileSize;
-        if (sprite2D != null) {
-            int section = direction.getSection();
-            BufferedImage frame = sprite2D.getFrameBySection(section);
-
-            int screenX = this.getWorldX() + Camera2D.getInstance().getOffsetX();
-            int screenY = this.getWorldY() + Camera2D.getInstance().getOffsetY();
-
-            graphics2D.drawImage(frame, screenX, screenY, tileSize, tileSize, null);
-            graphics2D.setColor(new Color(1, 0, 0, 0.5f));
-            graphics2D.fillRect(screenX + area2D.x, screenY + area2D.y, area2D.width, area2D.height);
         }
     }
 }
