@@ -2,7 +2,6 @@ package entities;
 
 import components.Area2D;
 import components.Camera2D;
-import components.Collider2D;
 import components.Sprite2D;
 import graphics.GamePanel;
 import graphics.KeyHandler;
@@ -15,7 +14,6 @@ import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
     private KeyHandler keyHandler;
-    private Boolean canMove = true;
 
     public Player(int x, int y) {
         super(x, y);
@@ -26,8 +24,7 @@ public class Player extends Entity {
 
     @Override
     public void update() {
-
-        if (keyHandler.isNothingPressed() || !canMove) {
+        if (keyHandler.isNothingPressed()) {
             state = EntityState.IDLE;
             sprite2D.resetFrameAnimationCount();
 
@@ -48,27 +45,19 @@ public class Player extends Entity {
                 direction = EntityDirection.RIGHT;
             }
 
-            Collider2D collider = GamePanel.getInstance().checkCollision(this, worldX, worldY, direction, speed);
+            Area2D area = GamePanel.getInstance().checkCollision(this);
 
-            if (collider != null) {
+            if (area != null && area.getEntity().isCollisionEnabled()) {
                 return;
             }
 
             switch (direction) {
-                case DOWN -> worldY += speed;
-                case UP -> worldY -= speed;
-                case LEFT -> worldX -= speed;
-                case RIGHT -> worldX += speed;
+                case DOWN -> y += speed;
+                case UP -> y -= speed;
+                case LEFT -> x -= speed;
+                case RIGHT -> x += speed;
             }
         }
-    }
-
-    public void setCanMove(Boolean canMove) {
-        this.canMove = canMove;
-    }
-
-    public Boolean canMove() {
-        return canMove;
     }
 
     @Override
@@ -77,22 +66,20 @@ public class Player extends Entity {
         if (sprite2D != null) {
             int section = direction.getSection();
             BufferedImage frame = sprite2D.getFrameBySection(section);
-            int x = 0;
-            int y = 0;
+
+            int x;
+            int y;
 
             if (Camera2D.getInstance().getEntity() == this) {
                 x = Camera2D.getInstance().getScreenX();
                 y = Camera2D.getInstance().getScreenY();
             } else {
-                x = worldX + Camera2D.getInstance().getOffsetX();
-                y = worldY + Camera2D.getInstance().getOffsetY();
+                x = this.getWorldX() + Camera2D.getInstance().getOffsetX();
+                y = this.getWorldY() + Camera2D.getInstance().getOffsetY();
             }
             graphics2D.drawImage(frame, x, y, tileSize, tileSize, null);
+            graphics2D.setColor(new Color(1, 0, 0, 0.5f));
+            graphics2D.fillRect(x + area2D.x, y + area2D.y, area2D.width, area2D.height);
         }
-    }
-
-    @Override
-    public void onCollisionEntered(Collider2D collider2D) {
-
     }
 }

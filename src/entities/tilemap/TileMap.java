@@ -1,5 +1,6 @@
-package tilesets;
+package entities.tilemap;
 
+import entities.Entity;
 import graphics.GamePanel;
 import utils.enumerations.TileType;
 
@@ -7,20 +8,19 @@ import java.awt.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class TileMap {
+public class TileMap extends Entity {
     private Tile[][] tilemap;
-    private int worldX, worldY;
-    private int screenX, screenY;
 
-    public void loadMap(String filepath, int worldX, int worldY) {
-        this.worldX = worldX;
-        this.worldY = worldY;
-        this.screenX = worldX;
-        this.screenY = worldY;
+    public TileMap(int x, int y) {
+        super(x, y);
+        this.screenX = x;
+        this.screenY = y;
+    }
+
+    public void loadMap(String filepath) {
 
         int[][] tilemapRaw;
 
@@ -47,6 +47,7 @@ public class TileMap {
                     TileType type = TileType.rawValue(line[i]);
                     if (type != null) {
                         Tile tile = new Tile(i * tileSize, j * tileSize, type);
+                        tile.setParent(this);
                         tileLine[i] = tile;
                     }
                 }
@@ -58,41 +59,9 @@ public class TileMap {
         }
     }
 
-    public int getWorldX() {
-        return worldX;
-    }
-
-    public int getWorldY() {
-        return worldY;
-    }
-
-    public void setWorldX(int worldX) {
-        this.worldX = worldX;
-    }
-
-    public void setWorldY(int worldY) {
-        this.worldY = worldY;
-    }
-
-    public int getScreenX() {
-        return screenX;
-    }
-
-    public void setScreenX(int screenX) {
-        this.screenX = screenX;
-    }
-
-    public int getScreenY() {
-        return screenY;
-    }
-
-    public void setScreenY(int screenY) {
-        this.screenY = screenY;
-    }
-
     public Tile getTileByWorldPosition(int worldX, int worldY) {
-        int localX = worldX - this.worldX;
-        int localY = worldY - this.worldY;
+        int localX = worldX - x;
+        int localY = worldY - y;
         int i = localX / GamePanel.tileSize;
         int j = localY / GamePanel.tileSize;
 
@@ -106,14 +75,16 @@ public class TileMap {
         return null;
     }
 
+    @Override
+    public void update() {
+        // Nothing
+    }
+
+    @Override
     public void draw(Graphics2D graphics2D) {
         if (tilemap != null) {
             for (Tile[] line: tilemap) {
                 for (Tile tile: line) {
-                    tile.setWorldX(worldX);
-                    tile.setWorldY(worldY);
-                    tile.setScreenX(screenX);
-                    tile.setScreenY(screenY);
                     tile.draw(graphics2D);
                 }
             }
