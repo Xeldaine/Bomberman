@@ -11,6 +11,7 @@ import java.awt.*;
 public abstract class Entity {
     protected Entity parent;
     protected int x, y; // position of the entity relative to parent (if parent == null, they represent world coordinates)
+    protected int speed = 2 * GamePanel.scale; //default value for speed
     protected Sprite2D sprite2D;
     protected Area2D area2D;
     protected Boolean isCollisionEnabled = false;
@@ -54,6 +55,14 @@ public abstract class Entity {
     public int getWorldY() {
         int parentY = parent != null ? parent.getWorldY() : 0;
         return parentY + this.y;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed * GamePanel.scale;
     }
 
     public Boolean isCollisionEnabled() {

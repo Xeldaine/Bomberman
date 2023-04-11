@@ -119,15 +119,15 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public Area2D checkCollision(Entity entity){
-        int x = entity.getWorldX();
-        int y = entity.getWorldY();
+        int x = entity.getWorldX() + entity.getArea2D().x;
+        int y = entity.getWorldY() + entity.getArea2D().y;
         EntityDirection direction = entity.getDirection();
 
         switch (direction) {
-            case UP: y -= tileSize;
-            case DOWN: y += tileSize;
-            case LEFT: x -= tileSize;
-            case RIGHT: x += tileSize;
+            case UP: y -= entity.getArea2D().height - entity.getSpeed();
+            case DOWN: y += entity.getArea2D().height + entity.getSpeed();
+            case LEFT: x -= entity.getArea2D().width - entity.getSpeed();
+            case RIGHT: x += entity.getArea2D().width + entity.getSpeed();
         }
 
         Tile tile = currTileMap.getTileByWorldPosition(x, y);

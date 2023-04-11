@@ -12,7 +12,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
-    private int speed = 2 * GamePanel.scale; //default value for speed
     private KeyHandler keyHandler;
 
     public Player(int x, int y) {
@@ -20,14 +19,6 @@ public class Player extends Entity {
         this.keyHandler = GamePanel.getInstance().getKeyHandler();
         setSprite2D(new Sprite2D(GamePanel.originalTileSize, GamePanel.originalTileSize, 4, Const.bombermanPath));
         setArea2D(new Area2D(12 * GamePanel.scale, 18 * GamePanel.scale, 8 * GamePanel.scale, 13 * GamePanel.scale, this));
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
-
-    public int getSpeed() {
-        return speed;
     }
 
     @Override
@@ -56,7 +47,7 @@ public class Player extends Entity {
             Area2D area = GamePanel.getInstance().checkCollision(this);
 
             if (area != null && area.getEntity().isCollisionEnabled()) {
-                //return;
+                return;
             }
 
             switch (direction) {
