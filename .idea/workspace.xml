@@ -4,15 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="984ca510-826f-4715-aed2-4abfc8cb419e" name="Changes" comment="collision detection (wip, doesn't work fine yet)">
+    <list default="true" id="984ca510-826f-4715-aed2-4abfc8cb419e" name="Changes" comment="huge refactor + collision wip">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Area2D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Area2D.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Collider2D.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entities/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Entity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/tilemap/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/tilemap/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/tilemap/TileMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/tilemap/TileMap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/graphics/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tilesets/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/tilemap/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tilesets/TileMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/tilemap/TileMap.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +196,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681135506447</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="huge refactor + collision wip">
+      <created>1681173405433</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1681173405433</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -222,7 +227,8 @@
     <MESSAGE value="implemented camera movement" />
     <MESSAGE value="refactor" />
     <MESSAGE value="collision detection (wip, doesn't work fine yet)" />
-    <option name="LAST_COMMIT_MESSAGE" value="collision detection (wip, doesn't work fine yet)" />
+    <MESSAGE value="huge refactor + collision wip" />
+    <option name="LAST_COMMIT_MESSAGE" value="huge refactor + collision wip" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

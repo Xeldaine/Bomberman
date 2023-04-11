@@ -9,15 +9,13 @@ import utils.enumerations.EntityState;
 import java.awt.*;
 
 public abstract class Entity {
-    protected int x, y; // position of the entity relative to parent (if parent == null, they represents world coordinates)
-    protected int screenX, screenY; // position of the entity in the screen
-    protected int speed = 2 * GamePanel.scale; //default value for speed
+    protected Entity parent;
+    protected int x, y; // position of the entity relative to parent (if parent == null, they represent world coordinates)
     protected Sprite2D sprite2D;
     protected Area2D area2D;
     protected Boolean isCollisionEnabled = false;
     protected EntityState state = EntityState.IDLE;
     protected EntityDirection direction = EntityDirection.DOWN;
-    protected Entity parent;
 
     public Entity(int x, int y) {
         this.x = x;
@@ -58,14 +56,6 @@ public abstract class Entity {
         return parentY + this.y;
     }
 
-    public int getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
-
     public Boolean isCollisionEnabled() {
         return isCollisionEnabled;
     }
@@ -96,22 +86,6 @@ public abstract class Entity {
 
     public Entity getParent() {
         return parent;
-    }
-
-    public int getScreenX() {
-        return screenX;
-    }
-
-    public void setScreenX(int screenX) {
-        this.screenX = screenX;
-    }
-
-    public int getScreenY() {
-        return screenY;
-    }
-
-    public void setScreenY(int screenY) {
-        this.screenY = screenY;
     }
 
     public abstract void update();

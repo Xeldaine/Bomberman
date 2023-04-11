@@ -24,7 +24,8 @@ public class GamePanel extends JPanel implements Runnable {
     private static GamePanel instance;
     private Thread gameThread;
     private final KeyHandler keyHandler;
-    private TileMap tileMap;
+    private TileMap currTileMap;
+    private Player currPlayer;
     private Boolean isGameOver = false;
     private ArrayList<Entity> entities = new ArrayList<>();
 
@@ -34,15 +35,16 @@ public class GamePanel extends JPanel implements Runnable {
         setDoubleBuffered(true);
         keyHandler = new KeyHandler();
         addKeyListener(keyHandler);
-        tileMap = new TileMap(0, 0);
-        tileMap.loadMap(Const.map01Path);
         setFocusable(true);
     }
 
     public void loadEntities() {
-        Player player = new Player(tileSize, tileSize);
-        Camera2D.getInstance().setEntity(player);
-        entities.add(player);
+        currPlayer = new Player(tileSize, tileSize);
+        Camera2D.getInstance().setEntity(currPlayer);
+        currTileMap = new TileMap(0, 0);
+        currTileMap.loadMap(Const.map01Path);
+        entities.add(currTileMap);
+        entities.add(currPlayer);
     }
 
     public static GamePanel getInstance() {
@@ -63,6 +65,14 @@ public class GamePanel extends JPanel implements Runnable {
 
     public Boolean getGameOver() {
         return isGameOver;
+    }
+
+    public Player getCurrPlayer() {
+        return currPlayer;
+    }
+
+    public TileMap getCurrTileMap() {
+        return currTileMap;
     }
 
     public void startGame() {
@@ -109,9 +119,8 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public Area2D checkCollision(Entity entity){
-
-        int x = entity.getX();
-        int y = entity.getY();
+        int x = entity.getWorldX();
+        int y = entity.getWorldY();
         EntityDirection direction = entity.getDirection();
 
         switch (direction) {
@@ -121,7 +130,7 @@ public class GamePanel extends JPanel implements Runnable {
             case RIGHT: x += tileSize;
         }
 
-        Tile tile = tileMap.getTileByWorldPosition(x, y);
+        Tile tile = currTileMap.getTileByWorldPosition(x, y);
 
         if (tile != null) {
             Area2D areaEntity = entity.getArea2D();
@@ -137,10 +146,6 @@ public class GamePanel extends JPanel implements Runnable {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D graphics2D = (Graphics2D) g;
-        Camera2D camera2D = Camera2D.getInstance();
-        tileMap.setScreenX(camera2D.getOffsetX());
-        tileMap.setScreenY(camera2D.getOffsetY());
-        tileMap.draw(graphics2D);
 
         for (Entity entity : entities) {
             entity.draw(graphics2D);

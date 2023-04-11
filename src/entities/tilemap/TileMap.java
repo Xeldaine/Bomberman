@@ -16,8 +16,6 @@ public class TileMap extends Entity {
 
     public TileMap(int x, int y) {
         super(x, y);
-        this.screenX = x;
-        this.screenY = y;
     }
 
     public void loadMap(String filepath) {

@@ -8,11 +8,11 @@ import graphics.KeyHandler;
 import utils.Const;
 import utils.enumerations.EntityDirection;
 import utils.enumerations.EntityState;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
+    private int speed = 2 * GamePanel.scale; //default value for speed
     private KeyHandler keyHandler;
 
     public Player(int x, int y) {
@@ -20,6 +20,14 @@ public class Player extends Entity {
         this.keyHandler = GamePanel.getInstance().getKeyHandler();
         setSprite2D(new Sprite2D(GamePanel.originalTileSize, GamePanel.originalTileSize, 4, Const.bombermanPath));
         setArea2D(new Area2D(12 * GamePanel.scale, 18 * GamePanel.scale, 8 * GamePanel.scale, 13 * GamePanel.scale, this));
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public int getSpeed() {
+        return speed;
     }
 
     @Override
@@ -48,7 +56,7 @@ public class Player extends Entity {
             Area2D area = GamePanel.getInstance().checkCollision(this);
 
             if (area != null && area.getEntity().isCollisionEnabled()) {
-                return;
+                //return;
             }
 
             switch (direction) {
@@ -67,19 +75,12 @@ public class Player extends Entity {
             int section = direction.getSection();
             BufferedImage frame = sprite2D.getFrameBySection(section);
 
-            int x;
-            int y;
+            int screenX = this.getWorldX() + Camera2D.getInstance().getOffsetX();
+            int screenY = this.getWorldY() + Camera2D.getInstance().getOffsetY();
 
-            if (Camera2D.getInstance().getEntity() == this) {
-                x = Camera2D.getInstance().getScreenX();
-                y = Camera2D.getInstance().getScreenY();
-            } else {
-                x = this.getWorldX() + Camera2D.getInstance().getOffsetX();
-                y = this.getWorldY() + Camera2D.getInstance().getOffsetY();
-            }
-            graphics2D.drawImage(frame, x, y, tileSize, tileSize, null);
+            graphics2D.drawImage(frame, screenX, screenY, tileSize, tileSize, null);
             graphics2D.setColor(new Color(1, 0, 0, 0.5f));
-            graphics2D.fillRect(x + area2D.x, y + area2D.y, area2D.width, area2D.height);
+            graphics2D.fillRect(screenX + area2D.x, screenY + area2D.y, area2D.width, area2D.height);
         }
     }
 }
