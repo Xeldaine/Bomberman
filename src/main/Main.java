@@ -9,7 +9,7 @@ public class Main {
         window.setResizable(false);
         window.setTitle("Bomberman");
         GamePanel gamePanel = GamePanel.getInstance();
-        gamePanel.loadEntities();
+        gamePanel.loadMapAndPlayer();
         gamePanel.startGame();
         window.add(gamePanel);
         window.pack();

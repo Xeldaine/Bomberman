@@ -13,6 +13,10 @@ public abstract class Const {
     public static final String grassPath = baseSpritePath + "/grass.png";
     public static final String brickPath = baseSpritePath + "/brick.png";
     public static final String wallPath = baseSpritePath + "/wall.png";
+    public static final String bombPath = baseSpritePath + "/bomb.png";
+    public static final String explosionCenterPath = baseSpritePath + "/explosion_center.png";
+    public static final String explosionSidePath = baseSpritePath + "/explosion_side.png";
+    public static final String explosionEndPath = baseSpritePath + "/explosion_end.png";
 
     // maps
     public static final String map01Path = baseMapsPath + "/map01.txt";

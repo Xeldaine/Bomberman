@@ -122,7 +122,7 @@ public abstract class Entity {
 
     public void draw(Graphics2D graphics2D) {
         // draws the parent
-        if (sprite2D != null && area2D != null) {
+        if (sprite2D != null) {
             int tileSize = GamePanel.tileSize;
             int section = direction.getSection();
             BufferedImage frame = sprite2D.getFrameBySection(section);
@@ -132,7 +132,7 @@ public abstract class Entity {
 
             graphics2D.drawImage(frame, screenX, screenY, tileSize, tileSize, null);
 
-            if (Config.showCollisions && isCollisionEnabled) {
+            if (area2D != null && Config.showCollisions && isCollisionEnabled) {
                 graphics2D.setColor(Const.transparentRed);
                 graphics2D.fillRect(screenX + area2D.x, screenY + area2D.y, area2D.width, area2D.height);
             }

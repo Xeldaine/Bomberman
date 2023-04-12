@@ -9,20 +9,39 @@ import utils.Const;
 import utils.enumerations.EntityDirection;
 import utils.enumerations.EntityState;
 
-public class Player extends Entity {
+public class Player extends Entity{
     private KeyHandler keyHandler;
+    private final int cooldown = 5000; // millis
+    private long lastShot = 0;
 
     public Player(int x, int y) {
         super(x, y);
         this.keyHandler = GamePanel.getInstance().getKeyHandler();
         isCollisionEnabled = true;
         setSprite2D(new Sprite2D(GamePanel.originalTileSize, GamePanel.originalTileSize, 4, Const.bombermanPath));
-        setArea2D(new Area2D(12 * GamePanel.scale, 18 * GamePanel.scale, 8 * GamePanel.scale, 13 * GamePanel.scale, this));
+        this.sprite2D.setPriority(2);
+        setArea2D(new Area2D(10 * GamePanel.scale, 14 * GamePanel.scale, 12 * GamePanel.scale, 17 * GamePanel.scale, this));
+    }
+
+    private void setBomb() {
+        long currTime = System.currentTimeMillis();
+        if (currTime - lastShot > cooldown) {
+            lastShot = currTime;
+            int centerX = getWorldX() + GamePanel.tileSize / 2;
+            int centerY = getWorldY() + GamePanel.tileSize / 2;
+            Bomb bomb = new Bomb(centerX - (centerX % GamePanel.tileSize), centerY - (centerY % GamePanel.tileSize));
+            bomb.castExplosion();
+            GamePanel.getInstance().addEntity(bomb);
+        }
     }
 
     @Override
     public void update() {
-        if (keyHandler.isNothingPressed()) {
+        if (keyHandler.spacePressed) {
+            setBomb();
+        }
+
+        if (keyHandler.arrowNotPressed()) {
             state = EntityState.IDLE;
             sprite2D.resetFrameCounter();
 

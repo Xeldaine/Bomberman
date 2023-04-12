@@ -12,7 +12,9 @@ import utils.enumerations.EntityDirection;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class GamePanel extends JPanel implements Runnable {
     public static final int originalTileSize = 32;
@@ -26,8 +28,8 @@ public class GamePanel extends JPanel implements Runnable {
     private final KeyHandler keyHandler;
     private TileMap currTileMap;
     private Player currPlayer;
+    private ConcurrentLinkedQueue<Entity> entities = new ConcurrentLinkedQueue<>();
     private Boolean isGameOver = false;
-    private ArrayList<Entity> entities = new ArrayList<>();
 
     private GamePanel() {
         setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -38,13 +40,13 @@ public class GamePanel extends JPanel implements Runnable {
         setFocusable(true);
     }
 
-    public void loadEntities() {
+    public void loadMapAndPlayer() {
         currPlayer = new Player(tileSize, tileSize);
         Camera2D.getInstance().setEntity(currPlayer);
         currTileMap = new TileMap(0, 0);
         currTileMap.loadMap(Const.map01Path);
-        entities.add(currTileMap);
-        entities.add(currPlayer);
+        addEntity(currPlayer);
+        addEntity(currTileMap);
     }
 
     public static GamePanel getInstance() {
@@ -71,8 +73,24 @@ public class GamePanel extends JPanel implements Runnable {
         return currPlayer;
     }
 
+    public void setCurrPlayer(Player currPlayer) {
+        this.currPlayer = currPlayer;
+    }
+
     public TileMap getCurrTileMap() {
         return currTileMap;
+    }
+
+    public void setCurrTileMap(TileMap currTileMap) {
+        this.currTileMap = currTileMap;
+    }
+
+    public void addEntity(Entity entity) {
+        entities.add(entity);
+    }
+
+    public void removeEntity(Entity entity) {
+        entities.remove(entity);
     }
 
     public void startGame() {
@@ -112,8 +130,8 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
-    private void update(){
-        for (Entity entity : entities) {
+    private void update() {
+        for (Entity entity: entities) {
             entity.update();
         }
     }
@@ -183,7 +201,15 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
         Graphics2D graphics2D = (Graphics2D) g;
 
-        for (Entity entity : entities) {
+        List<Entity> entitiesToDraw = new ArrayList<>(entities);
+        Collections.sort(entitiesToDraw, (e1, e2) -> {
+            int prio1 = e1.getSprite2D() != null ? e1.getSprite2D().getPriority() : 0;
+            int prio2 = e2.getSprite2D() != null ? e2.getSprite2D().getPriority() : 0;
+
+            return prio1 - prio2;
+        });
+
+        for (Entity entity: entitiesToDraw) {
             entity.draw(graphics2D);
         }
 

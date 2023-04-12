@@ -1,17 +1,21 @@
 package model.components;
 
+import model.interfaces.Sprite2DListener;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 
 public class Sprite2D {
-    ArrayList<BufferedImage> spriteSheet;
-    int frameWidth = 0, frameHeight = 0; // width and height for each frame
-    int frameNumber = 1; // number of frames for each section
-    int frameCounter = 0; // the current number of frame
-    int spriteNumber = 10; // number of updates between each frame
-    int spriteCounter = 0; // the current number of update
+    private ArrayList<BufferedImage> spriteSheet;
+    private int frameWidth = 0, frameHeight = 0; // width and height for each frame
+    private int frameNumber = 1; // number of frames for each section
+    private int frameCounter = 0; // the current number of frame
+    private int spriteNumber = 10; // number of updates between each frame
+    private int spriteCounter = 0; // the current number of update
+    private Sprite2DListener listener;
+    private int priority = 0;
 
     public Sprite2D(int frameWidth, int frameHeight, int frameNumber, String filename) {
         if (frameWidth > 0 && frameHeight > 0) {
@@ -41,11 +45,33 @@ public class Sprite2D {
         }
     }
 
+    public Sprite2DListener getListener() {
+        return listener;
+    }
+
+    public void setListener(Sprite2DListener listener) {
+        this.listener = listener;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
     public void updateFrameCounter() {
         spriteCounter++;
         if (spriteCounter >= spriteNumber) {
+            if (listener != null) {
+                listener.didChangeFrame();
+            }
             spriteCounter -= spriteNumber;
             frameCounter = (frameCounter + 1) % frameNumber;
+            if(listener != null && frameCounter == 0) {
+                listener.didEndAnimation();
+            }
         }
     }
 

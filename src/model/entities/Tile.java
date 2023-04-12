@@ -13,6 +13,7 @@ public class Tile extends Entity {
         super(x, y);
         this.type = type;
         sprite2D = new Sprite2D(GamePanel.originalTileSize, GamePanel.originalTileSize, 1, type.getPath());
+        sprite2D.setPriority(0);
         area2D = new Area2D(0, 0, GamePanel.tileSize, GamePanel.tileSize, this);
         if (type == TileType.WALL || type == TileType.BRICK) {
             setCollisionEnabled(true);
