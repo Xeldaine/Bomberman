@@ -43,11 +43,8 @@ public class Player extends Entity {
                 direction = EntityDirection.RIGHT;
             }
 
-            Area2D area = GamePanel.getInstance().checkCollision(this);
-
-            if (area != null && area.getEntity().isCollisionEnabled()) {
-                return;
-            }
+            GamePanel.getInstance().checkCollision(this);
+            System.out.println(speed);
 
             switch (direction) {
                 case DOWN -> y += speed;

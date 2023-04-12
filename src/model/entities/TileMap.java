@@ -4,7 +4,6 @@ import model.Entity;
 import UI.GamePanel;
 import utils.enumerations.TileType;
 
-import java.awt.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -59,8 +58,8 @@ public class TileMap extends Entity {
     }
 
     public Tile getTileByWorldPosition(int worldX, int worldY) {
-        int localX = worldX - x;
-        int localY = worldY - y;
+        int localX = worldX - getWorldX();
+        int localY = worldY - getWorldY();
         int i = localX / GamePanel.tileSize;
         int j = localY / GamePanel.tileSize;
 

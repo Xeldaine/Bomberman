@@ -1,5 +1,7 @@
 package utils;
 
+import UI.GamePanel;
+
 import java.awt.*;
 
 public abstract class Const {
@@ -17,4 +19,7 @@ public abstract class Const {
 
     // colors
     public static final Color transparentRed = new Color(1, 0, 0, 0.5f);
+
+    // values
+    public static final int defaultSpeed = 2 * GamePanel.scale;
 }

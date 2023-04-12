@@ -118,28 +118,35 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
-    public Area2D checkCollision(Entity entity){
-        int x = entity.getWorldX() + entity.getArea2D().x;
-        int y = entity.getWorldY() + entity.getArea2D().y;
+    public void checkCollision(Entity entity){
+        Area2D area = entity.getArea2D();
         EntityDirection direction = entity.getDirection();
+        entity.setSpeed(Const.defaultSpeed);
 
-        switch (direction) {
-            case UP: y -= entity.getArea2D().height - entity.getSpeed();
-            case DOWN: y += entity.getArea2D().height + entity.getSpeed();
-            case LEFT: x -= entity.getArea2D().width - entity.getSpeed();
-            case RIGHT: x += entity.getArea2D().width + entity.getSpeed();
-        }
+        for (int i = 1; i <= Const.defaultSpeed; i++) {
+            int x = entity.getWorldX() + (area != null ? area.x : 0);
+            int y = entity.getWorldY() + (area != null ? area.y : 0);
 
-        Tile tile = currTileMap.getTileByWorldPosition(x, y);
+            int offsetX = 0;
+            int offsetY = 0;
+            switch (direction) {
+                case UP: y -= i; offsetY = -i; break;
+                case DOWN: y += (area != null ? area.height : 0) + i; offsetY = i; break;
+                case LEFT: x -= i; offsetX = -i; break;
+                case RIGHT: x += (area != null ? area.width : 0) + i; offsetX = i; break;
+            }
 
-        if (tile != null) {
-            Area2D areaEntity = entity.getArea2D();
-            Area2D areaTile = tile.getArea2D();
-            if (areaEntity.intersect(areaTile)) {
-                return areaTile;
+            Tile tile = currTileMap.getTileByWorldPosition(x, y);
+
+            if (tile != null) {
+                Area2D areaEntity = entity.getArea2D();
+                Area2D areaTile = tile.getArea2D();
+                if (areaEntity.intersectsWithOffset(areaTile, offsetX, offsetY) && tile.isCollisionEnabled()) {
+                    entity.setSpeed(i-1);
+                    return;
+                }
             }
         }
-        return null;
     }
 
     @Override
