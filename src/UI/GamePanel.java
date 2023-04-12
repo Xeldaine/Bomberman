@@ -124,26 +124,55 @@ public class GamePanel extends JPanel implements Runnable {
         entity.setSpeed(Const.defaultSpeed);
 
         for (int i = 1; i <= Const.defaultSpeed; i++) {
-            int x = entity.getWorldX() + (area != null ? area.x : 0);
-            int y = entity.getWorldY() + (area != null ? area.y : 0);
+            int x1 = entity.getWorldX() + (area != null ? area.x : 0);
+            int y1 = entity.getWorldY() + (area != null ? area.y : 0);
+            int x2 = x1;
+            int y2 = y1;
 
             int offsetX = 0;
             int offsetY = 0;
+
+            int height = area != null ? area.height : 0;
+            int width = area != null ? area.width : 0;
+
             switch (direction) {
-                case UP: y -= i; offsetY = -i; break;
-                case DOWN: y += (area != null ? area.height : 0) + i; offsetY = i; break;
-                case LEFT: x -= i; offsetX = -i; break;
-                case RIGHT: x += (area != null ? area.width : 0) + i; offsetX = i; break;
+                case UP:
+                    y1 -= i;
+                    x2 += width;
+                    y2 = y1;
+                    offsetY = -i;
+                    break;
+                case DOWN:
+                    y1 += height + i;
+                    x2 += width;
+                    y2 = y1;
+                    offsetY = i;
+                    break;
+                case LEFT:
+                    x1 -= i;
+                    x2 = x1;
+                    y2 += height;
+                    offsetX = -i;
+                    break;
+                case RIGHT:
+                    x1 += width + i;
+                    x2 = x1;
+                    y2 += height;
+                    offsetX = i;
+                    break;
             }
 
-            Tile tile = currTileMap.getTileByWorldPosition(x, y);
+            Tile tile1 = currTileMap.getTileByWorldPosition(x1, y1);
+            Tile tile2 = currTileMap.getTileByWorldPosition(x2, y2);
 
-            if (tile != null) {
-                Area2D areaEntity = entity.getArea2D();
-                Area2D areaTile = tile.getArea2D();
-                if (areaEntity.intersectsWithOffset(areaTile, offsetX, offsetY) && tile.isCollisionEnabled()) {
-                    entity.setSpeed(i-1);
-                    return;
+            for (Tile tile : new Tile[]{tile1, tile2}) {
+                if (tile != null) {
+                    Area2D areaEntity = entity.getArea2D();
+                    Area2D areaTile = tile.getArea2D();
+                    if (areaEntity.intersectsWithOffset(areaTile, offsetX, offsetY) && tile.isCollisionEnabled()) {
+                        entity.setSpeed(i - 1);
+                        return;
+                    }
                 }
             }
         }

@@ -44,7 +44,6 @@ public class Player extends Entity {
             }
 
             GamePanel.getInstance().checkCollision(this);
-            System.out.println(speed);
 
             switch (direction) {
                 case DOWN -> y += speed;
