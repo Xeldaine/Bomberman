@@ -4,18 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="984ca510-826f-4715-aed2-4abfc8cb419e" name="Changes" comment="centered method draw in Entity">
+    <list default="true" id="984ca510-826f-4715-aed2-4abfc8cb419e" name="Changes" comment="refactor">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Area2D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/components/Area2D.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Camera2D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/components/Camera2D.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Sprite2D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/components/Sprite2D.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/tilemap/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/tilemap/TileMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/TileMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphics/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphics/KeyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/KeyHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/entities/TileMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/TileMap.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,7 +222,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681211858772</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="refactor">
+      <created>1681221750915</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1681221750915</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -251,13 +251,13 @@
     <MESSAGE value="added sprite manager and player animation" />
     <MESSAGE value="tileset and maps" />
     <MESSAGE value="implemented camera movement" />
-    <MESSAGE value="refactor" />
     <MESSAGE value="collision detection (wip, doesn't work fine yet)" />
     <MESSAGE value="huge refactor + collision wip" />
     <MESSAGE value="refactor + collision wip" />
     <MESSAGE value="collision wip" />
     <MESSAGE value="centered method draw in Entity" />
-    <option name="LAST_COMMIT_MESSAGE" value="centered method draw in Entity" />
+    <MESSAGE value="refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

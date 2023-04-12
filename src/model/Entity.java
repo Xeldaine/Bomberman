@@ -8,12 +8,13 @@ import utils.Config;
 import utils.Const;
 import utils.enumerations.EntityDirection;
 import utils.enumerations.EntityState;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public abstract class Entity {
     protected Entity parent;
+    protected ArrayList<Entity> children = new ArrayList<>();
     protected int x, y; // position of the entity relative to parent (if parent == null, they represent world coordinates)
     protected int speed = 2 * GamePanel.scale; //default value for speed
     protected Sprite2D sprite2D;
@@ -101,9 +102,26 @@ public abstract class Entity {
         return parent;
     }
 
+    public ArrayList<Entity> getChildren() {
+        return children;
+    }
+
+    public void addChild(Entity child) {
+        children.add(child);
+    }
+
+    public void removeChild(Entity child) {
+        children.remove(child);
+    }
+
+    public void removeAllChildren() {
+        children.clear();
+    }
+
     public abstract void update();
 
     public void draw(Graphics2D graphics2D) {
+        // draws the parent
         if (sprite2D != null && area2D != null) {
             int tileSize = GamePanel.tileSize;
             int section = direction.getSection();
@@ -114,10 +132,15 @@ public abstract class Entity {
 
             graphics2D.drawImage(frame, screenX, screenY, tileSize, tileSize, null);
 
-            if (Config.showCollisions) {
+            if (Config.showCollisions && isCollisionEnabled) {
                 graphics2D.setColor(Const.transparentRed);
                 graphics2D.fillRect(screenX + area2D.x, screenY + area2D.y, area2D.width, area2D.height);
             }
+        }
+
+        // draws the children
+        for (Entity child: children) {
+            child.draw(graphics2D);
         }
     }
 }

@@ -46,6 +46,7 @@ public class TileMap extends Entity {
                     if (type != null) {
                         Tile tile = new Tile(i * tileSize, j * tileSize, type);
                         tile.setParent(this);
+                        addChild(tile);
                         tileLine[i] = tile;
                     }
                 }
@@ -76,16 +77,5 @@ public class TileMap extends Entity {
     @Override
     public void update() {
         // Nothing
-    }
-
-    @Override
-    public void draw(Graphics2D graphics2D) {
-        if (tilemap != null) {
-            for (Tile[] line: tilemap) {
-                for (Tile tile: line) {
-                    tile.draw(graphics2D);
-                }
-            }
-        }
     }
 }

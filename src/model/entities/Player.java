@@ -15,6 +15,7 @@ public class Player extends Entity {
     public Player(int x, int y) {
         super(x, y);
         this.keyHandler = GamePanel.getInstance().getKeyHandler();
+        isCollisionEnabled = true;
         setSprite2D(new Sprite2D(GamePanel.originalTileSize, GamePanel.originalTileSize, 4, Const.bombermanPath));
         setArea2D(new Area2D(12 * GamePanel.scale, 18 * GamePanel.scale, 8 * GamePanel.scale, 13 * GamePanel.scale, this));
     }
