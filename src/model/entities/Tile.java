@@ -33,4 +33,9 @@ public class Tile extends Entity {
     public void update() {
         // nothing to update
     }
+
+    @Override
+    public void onAreaEntered(Area2D area) {
+        super.onAreaEntered(area);
+    }
 }

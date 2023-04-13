@@ -12,24 +12,21 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
 public abstract class Entity implements PropertyChangeListener {
-    protected Entity parent;
-    protected ArrayList<Entity> children = new ArrayList<>();
+    private Entity parent;
+    private ArrayList<Entity> children = new ArrayList<>();
     protected int x, y; // position of the entity relative to parent (if parent == null, they represent world coordinates)
     protected int speed = Const.defaultSpeed;
     protected Sprite2D sprite2D;
     protected Area2D area2D;
-    protected PropertyChangeSupport support;
-    protected EntityState state = EntityState.IDLE;
-    protected EntityDirection direction = EntityDirection.DOWN;
+    protected EntityState state;
+    protected EntityDirection direction;
 
     public Entity(int x, int y) {
         this.x = x;
         this.y = y;
-        support = new PropertyChangeSupport(this);
     }
 
     public EntityState getState() {
@@ -90,7 +87,7 @@ public abstract class Entity implements PropertyChangeListener {
         this.area2D = area2D;
     }
 
-    public void setParent(Entity parent) {
+    private void setParent(Entity parent) {
         this.parent = parent;
     }
 
@@ -104,22 +101,36 @@ public abstract class Entity implements PropertyChangeListener {
 
     public void addChild(Entity child) {
         children.add(child);
+        child.setParent(this);
     }
 
     public void removeChild(Entity child) {
         children.remove(child);
+        child.setParent(null);
     }
 
     public void removeAllChildren() {
-        children.clear();
+        for(Entity child: children) {
+            removeChild(child);
+        }
     }
 
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        this.support.addPropertyChangeListener(listener);
-    }
+    public final void updateData() {
 
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        this.support.removePropertyChangeListener(listener);
+        this.update();
+
+        if (sprite2D != null) {
+            if (state == EntityState.IDLE) {
+                sprite2D.resetFrameCounter();
+
+            } else {
+                sprite2D.updateFrameCounter();
+            }
+        }
+
+        for (Entity child: children) {
+            child.updateData();
+        }
     }
 
     public abstract void update();
@@ -128,7 +139,7 @@ public abstract class Entity implements PropertyChangeListener {
         // draws the parent
         if (sprite2D != null) {
             int tileSize = GamePanel.tileSize;
-            int section = direction.getSection();
+            int section = direction != null ? direction.getSection() : 0;
             BufferedImage frame = sprite2D.getFrameBySection(section);
 
             int screenX = this.getWorldX() + Camera2D.getInstance().getOffsetX();
@@ -150,9 +161,16 @@ public abstract class Entity implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        Area2D area = (Area2D) evt.getNewValue();
-        if (area != null && area2D != null && area2D.intersectsWithOffset(area, 0, 0)) {
-            this.onAreaEntered(area);
+        if(evt.getPropertyName().equals(Const.pclKeyArea)) {
+            Area2D area = (Area2D) evt.getNewValue();
+            if (area != null && area2D != null && area.getEntity() != this && area2D.intersectsWithOffset(area, 0, 0)) {
+                this.onAreaEntered(area);
+            }
+        }
+
+        // propagates the event to the children
+        for (Entity child: children) {
+            child.propertyChange(evt);
         }
     }
 

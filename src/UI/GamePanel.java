@@ -12,6 +12,7 @@ import utils.enumerations.EntityDirection;
 
 import javax.swing.*;
 import java.awt.*;
+import java.beans.PropertyChangeSupport;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -57,6 +58,11 @@ public class GamePanel extends JPanel implements Runnable {
         return instance;
     }
 
+    @Override
+    public void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
+        super.firePropertyChange(propertyName, oldValue, newValue);
+    }
+
     public KeyHandler getKeyHandler() {
         return keyHandler;
     }
@@ -86,18 +92,12 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void addEntity(Entity entity) {
-        for (Entity e: entities) {
-            entity.addPropertyChangeListener(e);
-            e.addPropertyChangeListener(entity);
-        }
+        this.addPropertyChangeListener(entity);
         entities.add(entity);
     }
 
     public void removeEntity(Entity entity) {
-        for(Entity e: entities) {
-            entity.removePropertyChangeListener(e);
-            e.removePropertyChangeListener(entity);
-        }
+        this.removePropertyChangeListener(entity);
         entities.remove(entity);
     }
 
@@ -140,7 +140,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     private void update() {
         for (Entity entity: entities) {
-            entity.update();
+            entity.updateData();
         }
     }
 

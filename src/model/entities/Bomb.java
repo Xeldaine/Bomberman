@@ -19,7 +19,6 @@ public class Bomb extends Entity {
 
     @Override
     public void update() {
-        sprite2D.updateFrameCounter();
         if (start > 0 && System.currentTimeMillis() - start > detonationTime) {
             explode();
             start = 0;
@@ -31,7 +30,7 @@ public class Bomb extends Entity {
     }
 
     private void explode() {
-        Explosion explosion = new Explosion(getWorldX(), getWorldY());
+        Explosion explosion = new Explosion(getWorldX(), getWorldY(), 3, 0, null);
         GamePanel.getInstance().addEntity(explosion);
         GamePanel.getInstance().removeEntity(this);
     }

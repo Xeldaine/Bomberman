@@ -42,11 +42,9 @@ public class Player extends Entity{
 
         if (keyHandler.arrowNotPressed()) {
             state = EntityState.IDLE;
-            sprite2D.resetFrameCounter();
 
         } else {
             state = EntityState.MOVING;
-            sprite2D.updateFrameCounter();
 
             if (keyHandler.downPressed) {
                 direction = EntityDirection.DOWN;

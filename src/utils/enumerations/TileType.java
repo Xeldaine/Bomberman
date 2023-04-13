@@ -6,14 +6,9 @@ public enum TileType {
     GRASS, BRICK, WALL;
 
     public static TileType rawValue(int rawValue) {
-        if (rawValue == 0) {
-            return TileType.GRASS;
-
-        } else if (rawValue == 1) {
-            return TileType.BRICK;
-
-        } else if (rawValue == 2) {
-            return TileType.WALL;
+        TileType[] values = TileType.values();
+        if(rawValue >= 0 && rawValue < values.length) {
+            return values[rawValue];
         }
         return null;
     }

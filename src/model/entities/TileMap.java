@@ -44,7 +44,6 @@ public class TileMap extends Entity {
                     TileType type = TileType.rawValue(line[i]);
                     if (type != null) {
                         Tile tile = new Tile(i * tileSize, j * tileSize, type);
-                        tile.setParent(this);
                         addChild(tile);
                         tileLine[i] = tile;
                     }

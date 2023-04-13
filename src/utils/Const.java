@@ -26,4 +26,7 @@ public abstract class Const {
 
     // values
     public static final int defaultSpeed = 2 * GamePanel.scale;
+
+    //keys
+    public static final String pclKeyArea = "area";
 }
