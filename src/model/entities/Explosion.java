@@ -19,6 +19,7 @@ public class Explosion extends Entity implements Sprite2DListener {
     @Override
     public void update() {
         sprite2D.updateFrameCounter();
+        this.support.firePropertyChange("area", null, area2D);
     }
 
     @Override

@@ -17,7 +17,6 @@ public class Player extends Entity{
     public Player(int x, int y) {
         super(x, y);
         this.keyHandler = GamePanel.getInstance().getKeyHandler();
-        isCollisionEnabled = true;
         setSprite2D(new Sprite2D(GamePanel.originalTileSize, GamePanel.originalTileSize, 4, Const.bombermanPath));
         this.sprite2D.setPriority(2);
         setArea2D(new Area2D(10 * GamePanel.scale, 14 * GamePanel.scale, 12 * GamePanel.scale, 17 * GamePanel.scale, this));
@@ -71,5 +70,11 @@ public class Player extends Entity{
                 case RIGHT -> x += speed;
             }
         }
+    }
+
+    @Override
+    public void onAreaEntered(Area2D area) {
+        super.onAreaEntered(area);
+        System.out.println("area entered!!");
     }
 }

@@ -86,10 +86,18 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void addEntity(Entity entity) {
+        for (Entity e: entities) {
+            entity.addPropertyChangeListener(e);
+            e.addPropertyChangeListener(entity);
+        }
         entities.add(entity);
     }
 
     public void removeEntity(Entity entity) {
+        for(Entity e: entities) {
+            entity.removePropertyChangeListener(e);
+            e.removePropertyChangeListener(entity);
+        }
         entities.remove(entity);
     }
 

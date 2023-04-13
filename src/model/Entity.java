@@ -10,22 +10,26 @@ import utils.enumerations.EntityDirection;
 import utils.enumerations.EntityState;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
-public abstract class Entity {
+public abstract class Entity implements PropertyChangeListener {
     protected Entity parent;
     protected ArrayList<Entity> children = new ArrayList<>();
     protected int x, y; // position of the entity relative to parent (if parent == null, they represent world coordinates)
     protected int speed = Const.defaultSpeed;
     protected Sprite2D sprite2D;
     protected Area2D area2D;
-    protected Boolean isCollisionEnabled = false;
+    protected PropertyChangeSupport support;
     protected EntityState state = EntityState.IDLE;
     protected EntityDirection direction = EntityDirection.DOWN;
 
     public Entity(int x, int y) {
         this.x = x;
         this.y = y;
+        support = new PropertyChangeSupport(this);
     }
 
     public EntityState getState() {
@@ -70,14 +74,6 @@ public abstract class Entity {
         this.speed = speed;
     }
 
-    public Boolean isCollisionEnabled() {
-        return isCollisionEnabled;
-    }
-
-    public void setCollisionEnabled(Boolean collisionEnabled) {
-        isCollisionEnabled = collisionEnabled;
-    }
-
     public void setSprite2D(Sprite2D sprite2D) {
         this.sprite2D = sprite2D;
     }
@@ -118,6 +114,14 @@ public abstract class Entity {
         children.clear();
     }
 
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        this.support.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        this.support.removePropertyChangeListener(listener);
+    }
+
     public abstract void update();
 
     public void draw(Graphics2D graphics2D) {
@@ -132,7 +136,7 @@ public abstract class Entity {
 
             graphics2D.drawImage(frame, screenX, screenY, tileSize, tileSize, null);
 
-            if (area2D != null && Config.showCollisions && isCollisionEnabled) {
+            if (area2D != null && Config.visibleAreas) {
                 graphics2D.setColor(Const.transparentRed);
                 graphics2D.fillRect(screenX + area2D.x, screenY + area2D.y, area2D.width, area2D.height);
             }
@@ -142,5 +146,17 @@ public abstract class Entity {
         for (Entity child: children) {
             child.draw(graphics2D);
         }
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        Area2D area = (Area2D) evt.getNewValue();
+        if (area != null && area2D != null && area2D.intersectsWithOffset(area, 0, 0)) {
+            this.onAreaEntered(area);
+        }
+    }
+
+    public void onAreaEntered(Area2D area) {
+        //void implementation
     }
 }

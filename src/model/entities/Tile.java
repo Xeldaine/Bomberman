@@ -8,6 +8,7 @@ import utils.enumerations.TileType;
 
 public class Tile extends Entity {
     private TileType type;
+    public Boolean isCollisionEnabled = false;
 
     public Tile(int x, int y, TileType type) {
         super(x, y);
@@ -18,6 +19,14 @@ public class Tile extends Entity {
         if (type == TileType.WALL || type == TileType.BRICK) {
             setCollisionEnabled(true);
         }
+    }
+
+    public Boolean isCollisionEnabled() {
+        return isCollisionEnabled;
+    }
+
+    public void setCollisionEnabled(Boolean collisionEnabled) {
+        isCollisionEnabled = collisionEnabled;
     }
 
     @Override

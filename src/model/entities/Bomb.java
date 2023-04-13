@@ -14,7 +14,6 @@ public class Bomb extends Entity {
         int tileSize = GamePanel.originalTileSize;
         this.sprite2D = new Sprite2D(tileSize, tileSize, 2, Const.bombPath);
         this.sprite2D.setPriority(1);
-        this.isCollisionEnabled = true;
         this.area2D = new Area2D(7 * GamePanel.scale, 11 * GamePanel.scale, 18 * GamePanel.scale, 18 * GamePanel.scale, this);
     }
 
@@ -32,7 +31,7 @@ public class Bomb extends Entity {
     }
 
     private void explode() {
-        Entity explosion = new Explosion(getWorldX(), getWorldY());
+        Explosion explosion = new Explosion(getWorldX(), getWorldY());
         GamePanel.getInstance().addEntity(explosion);
         GamePanel.getInstance().removeEntity(this);
     }
