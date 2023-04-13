@@ -73,7 +73,7 @@ public class TileMap extends Entity {
     }
 
     @Override
-    public void update() {
+    protected void update() {
         // Nothing
     }
 }

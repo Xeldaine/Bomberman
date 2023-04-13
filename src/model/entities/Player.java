@@ -35,7 +35,7 @@ public class Player extends Entity{
     }
 
     @Override
-    public void update() {
+    protected void update() {
         if (keyHandler.spacePressed) {
             setBomb();
         }

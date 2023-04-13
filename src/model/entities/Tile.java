@@ -30,8 +30,8 @@ public class Tile extends Entity {
     }
 
     @Override
-    public void update() {
-        // nothing to update
+    protected void update() {
+
     }
 
     @Override

@@ -1,11 +1,14 @@
 package model.components;
 
 import model.interfaces.Sprite2DListener;
+import utils.ImageUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Sprite2D {
     private ArrayList<BufferedImage> spriteSheet;
@@ -43,6 +46,24 @@ public class Sprite2D {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void rotateFrameClockwise90() {
+        List<BufferedImage> sheet = spriteSheet.stream().map( ImageUtils::rotateClockwise90).toList();
+        spriteSheet.clear();
+        spriteSheet.addAll(sheet);
+    }
+
+    public void rotateFrameAntiClockwise90() {
+        List<BufferedImage> sheet = spriteSheet.stream().map( ImageUtils::rotateAntiClockwise90).toList();
+        spriteSheet.clear();
+        spriteSheet.addAll(sheet);
+    }
+
+    public void rotateFrame180(){
+        List<BufferedImage> sheet = spriteSheet.stream().map( ImageUtils::rotateClockwise180).toList();
+        spriteSheet.clear();
+        spriteSheet.addAll(sheet);
     }
 
     public Sprite2DListener getListener() {

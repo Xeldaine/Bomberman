@@ -133,7 +133,7 @@ public abstract class Entity implements PropertyChangeListener {
         }
     }
 
-    public abstract void update();
+    protected abstract void update();
 
     public void draw(Graphics2D graphics2D) {
         // draws the parent

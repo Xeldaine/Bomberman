@@ -13,15 +13,21 @@ public class Explosion extends Entity implements Sprite2DListener {
     public Explosion(int x, int y, int radius, int level, EntityDirection direction) {
         super(x, y);
         this.area2D = new Area2D(0, 0, GamePanel.tileSize, GamePanel.tileSize, this);
-        this.direction = direction;
         String path = this.getImagePathByLevel(level, radius);
         this.sprite2D = new Sprite2D(GamePanel.originalTileSize, GamePanel.originalTileSize, 6, path);
         this.sprite2D.setListener(this);
         this.sprite2D.setPriority(3);
-        this.propagateExplosion(level, radius);
+        if (direction != null) {
+            switch (direction) {
+                case UP -> sprite2D.rotateFrameAntiClockwise90();
+                case DOWN -> sprite2D.rotateFrameClockwise90();
+                case LEFT -> sprite2D.rotateFrame180();
+            }
+        }
+        this.propagateExplosion(level, radius, direction);
     }
 
-    private void propagateExplosion(int level, int radius) {
+    private void propagateExplosion(int level, int radius, EntityDirection direction) {
         int tileSize = GamePanel.tileSize;
         if (level >= radius) {
             // stop
@@ -72,7 +78,7 @@ public class Explosion extends Entity implements Sprite2DListener {
     }
 
     @Override
-    public void update() {
+    protected void update() {
         GamePanel.getInstance().firePropertyChange(Const.pclKeyArea, null, area2D);
     }
 
@@ -85,6 +91,4 @@ public class Explosion extends Entity implements Sprite2DListener {
     public void didEndAnimation() {
         GamePanel.getInstance().removeEntity(this);
     }
-
-
 }
