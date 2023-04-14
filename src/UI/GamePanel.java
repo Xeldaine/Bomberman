@@ -30,7 +30,6 @@ public class GamePanel extends JPanel implements Runnable {
     private TileMap currTileMap;
     private Player currPlayer;
     private ConcurrentLinkedQueue<Entity> entities = new ConcurrentLinkedQueue<>();
-    private Boolean isGameOver = false;
 
     private GamePanel() {
         setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -65,14 +64,6 @@ public class GamePanel extends JPanel implements Runnable {
 
     public KeyHandler getKeyHandler() {
         return keyHandler;
-    }
-
-    public void setGameOver(Boolean gameOver) {
-        isGameOver = gameOver;
-    }
-
-    public Boolean getGameOver() {
-        return isGameOver;
     }
 
     public Player getCurrPlayer() {
@@ -117,7 +108,7 @@ public class GamePanel extends JPanel implements Runnable {
         long timer = 0;
         int actualFPS = 0;
 
-        while (!isGameOver) {
+        while (gameThread != null) {
             long currentTime = System.nanoTime();
             accumulator += currentTime - lastTime;
             timer += currentTime - lastTime;

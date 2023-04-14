@@ -14,7 +14,7 @@ public class Explosion extends Entity implements Sprite2DListener {
         super(x, y);
         this.area2D = new Area2D(0, 0, GamePanel.tileSize, GamePanel.tileSize, this);
         String path = this.getImagePathByLevel(level, radius);
-        this.sprite2D = new Sprite2D(GamePanel.originalTileSize, GamePanel.originalTileSize, 6, path);
+        this.sprite2D = new Sprite2D(GamePanel.originalTileSize, GamePanel.originalTileSize, 5, path);
         this.sprite2D.setListener(this);
         this.sprite2D.setPriority(3);
         if (direction != null) {
