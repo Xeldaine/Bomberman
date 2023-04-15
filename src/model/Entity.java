@@ -13,13 +13,11 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public abstract class Entity implements PropertyChangeListener {
     private Entity parent;
-    private ConcurrentLinkedQueue<Entity> children = new ConcurrentLinkedQueue<>();
+    private final ConcurrentLinkedQueue<Entity> children = new ConcurrentLinkedQueue<>();
     protected int x, y; // position of the entity relative to parent (if parent == null, they represent world coordinates)
     protected int speed = Const.defaultSpeed;
     protected Sprite2D sprite2D;
