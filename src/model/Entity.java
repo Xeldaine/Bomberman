@@ -119,7 +119,6 @@ public abstract class Entity implements PropertyChangeListener {
             sprite2D.updateFrameCounter();
         }
 
-        //collision check
         PositionChangedBundle oldValue = new PositionChangedBundle();
         oldValue.x = this.x;
         oldValue.y = this.y;
@@ -132,6 +131,7 @@ public abstract class Entity implements PropertyChangeListener {
         newValue.y = this.y;
         newValue.area2D = this.area2D;
 
+        //collision check
         if (newValue.x != oldValue.x || newValue.y != oldValue.y) {
             GamePanel.getInstance().firePropertyChange(Const.pclKeyArea, oldValue, newValue);
         }

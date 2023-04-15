@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="984ca510-826f-4715-aed2-4abfc8cb419e" name="Changes" comment="fix explosion + brick added">
+    <list default="true" id="984ca510-826f-4715-aed2-4abfc8cb419e" name="Changes" comment="refactor">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Entity.java" afterDir="false" />
     </list>
@@ -292,7 +292,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681557568834</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="refactor">
+      <created>1681558438567</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1681558438567</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -319,7 +326,6 @@
     <MESSAGE value="refactor + collision wip" />
     <MESSAGE value="collision wip" />
     <MESSAGE value="centered method draw in Entity" />
-    <MESSAGE value="refactor" />
     <MESSAGE value="fix collision algorithm" />
     <MESSAGE value="fix collision algorithm (now works fine)" />
     <MESSAGE value="bombs + explosions" />
@@ -328,7 +334,8 @@
     <MESSAGE value="fix explosion" />
     <MESSAGE value="fix explosion anim" />
     <MESSAGE value="fix explosion + brick added" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix explosion + brick added" />
+    <MESSAGE value="refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
