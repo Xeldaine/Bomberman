@@ -9,7 +9,7 @@ import utils.Const;
 
 public class Player extends Entity{
     private KeyHandler keyHandler;
-    private final int cooldown = 5000; // millis
+    private final int cooldown = 1000; // millis
     private long lastShot = 0;
 
     public Player(int x, int y) {

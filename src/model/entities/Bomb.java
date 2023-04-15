@@ -21,7 +21,6 @@ public class Bomb extends Entity {
     protected void update() {
         if (start > 0 && System.currentTimeMillis() - start > detonationTime) {
             explode();
-            start = 0;
         }
     }
 
@@ -30,9 +29,18 @@ public class Bomb extends Entity {
     }
 
     private void explode() {
+        start = 0;
         Explosion explosion = new Explosion(getWorldX(), getWorldY(), 2, 0);
         explosion.propagateExplosion();
         GamePanel.getInstance().addEntity(explosion);
         this.destroy();
+    }
+
+    @Override
+    public void onAreaEntered(Area2D area) {
+        super.onAreaEntered(area);
+        if (area.getEntity() instanceof Explosion) {
+            explode();
+        }
     }
 }

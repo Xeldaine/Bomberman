@@ -8,7 +8,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Sprite2D {
     private ArrayList<BufferedImage> spriteSheet;
@@ -49,13 +48,13 @@ public class Sprite2D {
     }
 
     public void rotateFrameClockwise90() {
-        List<BufferedImage> sheet = spriteSheet.stream().map( ImageUtils::rotateClockwise90).toList();
+        List<BufferedImage> sheet = spriteSheet.stream().map(ImageUtils::rotateClockwise90).toList();
         spriteSheet.clear();
         spriteSheet.addAll(sheet);
     }
 
     public void rotateFrameAntiClockwise90() {
-        List<BufferedImage> sheet = spriteSheet.stream().map( ImageUtils::rotateAntiClockwise90).toList();
+        List<BufferedImage> sheet = spriteSheet.stream().map(ImageUtils::rotateAntiClockwise90).toList();
         spriteSheet.clear();
         spriteSheet.addAll(sheet);
     }
