@@ -6,31 +6,30 @@ import model.components.Sprite2D;
 import UI.GamePanel;
 import utils.Config;
 import utils.Const;
+import utils.classes.PositionChangedBundle;
 import utils.enumerations.EntityDirection;
-import utils.enumerations.EntityState;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public abstract class Entity implements PropertyChangeListener {
     private Entity parent;
-    private ArrayList<Entity> children = new ArrayList<>();
+    private ConcurrentLinkedQueue<Entity> children = new ConcurrentLinkedQueue<>();
     protected int x, y; // position of the entity relative to parent (if parent == null, they represent world coordinates)
     protected int speed = Const.defaultSpeed;
     protected Sprite2D sprite2D;
     protected Area2D area2D;
-    protected EntityState state;
     protected EntityDirection direction;
+    public Boolean isCollisionEnabled = false;
 
     public Entity(int x, int y) {
         this.x = x;
         this.y = y;
-    }
-
-    public EntityState getState() {
-        return state;
     }
 
     public EntityDirection getDirection() {
@@ -95,7 +94,7 @@ public abstract class Entity implements PropertyChangeListener {
         return parent;
     }
 
-    public ArrayList<Entity> getChildren() {
+    public ConcurrentLinkedQueue<Entity> getChildren() {
         return children;
     }
 
@@ -117,20 +116,38 @@ public abstract class Entity implements PropertyChangeListener {
 
     public final void updateData() {
 
+        // sprite drawing
+        if (sprite2D != null) {
+            sprite2D.updateFrameCounter();
+        }
+
+        //collision check
+        PositionChangedBundle oldValue = new PositionChangedBundle();
+        oldValue.x = this.x;
+        oldValue.y = this.y;
+        oldValue.area2D = this.area2D;
+
         this.update();
 
-        if (sprite2D != null) {
-            if (state == EntityState.IDLE) {
-                sprite2D.resetFrameCounter();
+        PositionChangedBundle newValue = new PositionChangedBundle();
+        newValue.x = this.x;
+        newValue.y = this.y;
+        newValue.area2D = this.area2D;
 
-            } else {
-                sprite2D.updateFrameCounter();
-            }
+        if (newValue.x != oldValue.x || newValue.y != oldValue.y) {
+            GamePanel.getInstance().firePropertyChange(Const.pclKeyArea, oldValue, newValue);
         }
 
         for (Entity child: children) {
             child.updateData();
         }
+    }
+
+    public void destroy() {
+        if (parent != null) {
+            parent.removeChild(this);
+        }
+        GamePanel.getInstance().removeEntity(this);
     }
 
     protected abstract void update();
@@ -162,9 +179,24 @@ public abstract class Entity implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if(evt.getPropertyName().equals(Const.pclKeyArea)) {
-            Area2D area = (Area2D) evt.getNewValue();
-            if (area != null && area2D != null && area.getEntity() != this && area2D.intersectsWithOffset(area, 0, 0)) {
-                this.onAreaEntered(area);
+            PositionChangedBundle oldValue = (PositionChangedBundle) evt.getOldValue();
+            PositionChangedBundle newValue = (PositionChangedBundle) evt.getNewValue();
+            Area2D area = newValue.area2D;
+
+            if (area != null && area2D != null && area.getEntity() != this) {
+                if (isCollisionEnabled && oldValue != null) {
+                    // handles collisions
+                    int offsetX = newValue.x - oldValue.x;
+                    int offsetY = newValue.y - oldValue.y;
+
+                    if (area.intersectsWithOffset(area2D, offsetX, offsetY)) {
+                        area.getEntity().x = oldValue.x;
+                        area.getEntity().y = oldValue.y;
+                    }
+
+                } else if (area2D.intersectsWithOffset(area, 0, 0)) {
+                    this.onAreaEntered(area);
+                }
             }
         }
 

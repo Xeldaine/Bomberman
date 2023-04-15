@@ -1,5 +1,7 @@
 package UI;
 
+import utils.enumerations.EntityDirection;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -27,6 +29,23 @@ public class KeyHandler implements KeyListener {
 
     public Boolean arrowNotPressed() {
         return !upPressed && !downPressed && !rightPressed && !leftPressed;
+    }
+
+    public EntityDirection getDirectionByKeyPressed() {
+        if (downPressed) {
+            return EntityDirection.DOWN;
+        }
+        if (upPressed) {
+            return EntityDirection.UP;
+        }
+        if (leftPressed) {
+            return EntityDirection.LEFT;
+        }
+        if (rightPressed) {
+            return EntityDirection.RIGHT;
+        }
+
+        return null;
     }
 
     @Override

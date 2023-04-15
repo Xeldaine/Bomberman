@@ -8,34 +8,26 @@ import utils.enumerations.TileType;
 
 public class Tile extends Entity {
     private TileType type;
-    public Boolean isCollisionEnabled = false;
 
     public Tile(int x, int y, TileType type) {
         super(x, y);
+        setType(type);
+        area2D = new Area2D(0, 0, GamePanel.tileSize, GamePanel.tileSize, this);
+    }
+
+    public TileType getType() {
+        return type;
+    }
+
+    public void setType(TileType type) {
         this.type = type;
         sprite2D = new Sprite2D(GamePanel.originalTileSize, GamePanel.originalTileSize, 1, type.getPath());
         sprite2D.setPriority(0);
-        area2D = new Area2D(0, 0, GamePanel.tileSize, GamePanel.tileSize, this);
-        if (type == TileType.WALL || type == TileType.BRICK) {
-            setCollisionEnabled(true);
-        }
-    }
-
-    public Boolean isCollisionEnabled() {
-        return isCollisionEnabled;
-    }
-
-    public void setCollisionEnabled(Boolean collisionEnabled) {
-        isCollisionEnabled = collisionEnabled;
+        isCollisionEnabled = type == TileType.WALL || type == TileType.BRICK;
     }
 
     @Override
     protected void update() {
 
-    }
-
-    @Override
-    public void onAreaEntered(Area2D area) {
-        super.onAreaEntered(area);
     }
 }

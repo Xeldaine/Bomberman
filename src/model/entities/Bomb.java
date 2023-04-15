@@ -30,8 +30,9 @@ public class Bomb extends Entity {
     }
 
     private void explode() {
-        Explosion explosion = new Explosion(getWorldX(), getWorldY(), 2, 0, null);
+        Explosion explosion = new Explosion(getWorldX(), getWorldY(), 2, 0);
+        explosion.propagateExplosion();
         GamePanel.getInstance().addEntity(explosion);
-        GamePanel.getInstance().removeEntity(this);
+        this.destroy();
     }
 }

@@ -6,8 +6,6 @@ import UI.GamePanel;
 import UI.KeyHandler;
 import model.Entity;
 import utils.Const;
-import utils.enumerations.EntityDirection;
-import utils.enumerations.EntityState;
 
 public class Player extends Entity{
     private KeyHandler keyHandler;
@@ -36,30 +34,17 @@ public class Player extends Entity{
 
     @Override
     protected void update() {
+
         if (keyHandler.spacePressed) {
             setBomb();
         }
 
         if (keyHandler.arrowNotPressed()) {
-            state = EntityState.IDLE;
+            sprite2D.resetFrameCounter();
 
         } else {
-            state = EntityState.MOVING;
 
-            if (keyHandler.downPressed) {
-                direction = EntityDirection.DOWN;
-            }
-            if (keyHandler.upPressed) {
-                direction = EntityDirection.UP;
-            }
-            if (keyHandler.leftPressed) {
-                direction = EntityDirection.LEFT;
-            }
-            if (keyHandler.rightPressed) {
-                direction = EntityDirection.RIGHT;
-            }
-
-            GamePanel.getInstance().checkCollision(this);
+            direction = keyHandler.getDirectionByKeyPressed();
 
             switch (direction) {
                 case DOWN -> y += speed;

@@ -6,17 +6,31 @@ import model.components.Area2D;
 import model.components.Sprite2D;
 import model.interfaces.Sprite2DListener;
 import utils.Const;
+import utils.classes.PositionChangedBundle;
 import utils.enumerations.EntityDirection;
+import utils.enumerations.TileType;
 
 public class Explosion extends Entity implements Sprite2DListener {
 
-    public Explosion(int x, int y, int radius, int level, EntityDirection direction) {
+    private int radius;
+    private int level;
+
+    public Explosion(int x, int y, int radius, int level) {
         super(x, y);
         this.area2D = new Area2D(0, 0, GamePanel.tileSize, GamePanel.tileSize, this);
+        this.radius = radius;
+        this.level = level;
         String path = this.getImagePathByLevel(level, radius);
         this.sprite2D = new Sprite2D(GamePanel.originalTileSize, GamePanel.originalTileSize, 5, path);
         this.sprite2D.setListener(this);
         this.sprite2D.setPriority(3);
+    }
+
+    public void propagateExplosion() {
+        this.propagateExplosion(null);
+    }
+
+    private void propagateExplosion(EntityDirection direction) {
         if (direction != null) {
             switch (direction) {
                 case UP -> sprite2D.rotateFrameAntiClockwise90();
@@ -24,45 +38,62 @@ public class Explosion extends Entity implements Sprite2DListener {
                 case LEFT -> sprite2D.rotateFrame180();
             }
         }
-        this.propagateExplosion(level, radius, direction);
-    }
 
-    private void propagateExplosion(int level, int radius, EntityDirection direction) {
         int tileSize = GamePanel.tileSize;
         if (level >= radius) {
             // stop
 
         } else if (level == 0) {
-            Explosion exUp = new Explosion(0, -tileSize, radius, level + 1, EntityDirection.UP);
-            Explosion exDown = new Explosion(0, tileSize, radius, level + 1, EntityDirection.DOWN);
-            Explosion exLeft = new Explosion(-tileSize, 0, radius, level + 1, EntityDirection.LEFT);
-            Explosion exRight = new Explosion(tileSize, 0, radius, level + 1, EntityDirection.RIGHT);
+            Explosion exUp = new Explosion(0, -tileSize, radius, level + 1);
+            Explosion exDown = new Explosion(0, tileSize, radius, level + 1);
+            Explosion exLeft = new Explosion(-tileSize, 0, radius, level + 1);
+            Explosion exRight = new Explosion(tileSize, 0, radius, level + 1);
 
-            for (Explosion ex: new Explosion[] { exUp, exDown, exLeft, exRight} ) {
-                this.addChild(ex);
-            }
+            checkPropagateExplosion(exUp, EntityDirection.UP);
+            checkPropagateExplosion(exDown, EntityDirection.DOWN);
+            checkPropagateExplosion(exLeft, EntityDirection.LEFT);
+            checkPropagateExplosion(exRight, EntityDirection.RIGHT);
 
         } else {
             switch (direction) {
                 case DOWN -> {
-                    Explosion exDown = new Explosion(0, tileSize, radius, level + 1, EntityDirection.DOWN);
-                    this.addChild(exDown);
+                    Explosion exDown = new Explosion(0, tileSize, radius, level + 1);
+                    checkPropagateExplosion(exDown, direction);
                 }
                 case UP -> {
-                    Explosion exUp = new Explosion(0, -tileSize, radius, level + 1, EntityDirection.UP);
-                    this.addChild(exUp);
+                    Explosion exUp = new Explosion(0, -tileSize, radius, level + 1);
+                    checkPropagateExplosion(exUp, direction);
                 }
                 case LEFT -> {
-                    Explosion exLeft = new Explosion(-tileSize, 0, radius, level + 1, EntityDirection.LEFT);
-                    this.addChild(exLeft);
+                    Explosion exLeft = new Explosion(-tileSize, 0, radius, level + 1);
+                    checkPropagateExplosion(exLeft, direction);
                 }
                 case RIGHT -> {
-                    Explosion exRight = new Explosion(tileSize, 0, radius, level + 1, EntityDirection.RIGHT);
-                    this.addChild(exRight);
+                    Explosion exRight = new Explosion(tileSize, 0, radius, level + 1);
+                    checkPropagateExplosion(exRight, direction);
                 }
                 default -> { }
             }
         }
+    }
+
+    private void checkPropagateExplosion(Explosion ex, EntityDirection direction) {
+        this.addChild(ex);
+        Tile tile = GamePanel.getInstance().getCurrTileMap().getTileByWorldPosition(ex.getWorldX(), ex.getWorldY());
+        if (tile == null) {
+            this.removeChild(ex);
+            return;
+
+        } else if(tile.getType() == TileType.WALL) {
+            this.removeChild(ex);
+            return;
+
+        } else if (tile.getType() == TileType.BRICK) {
+            // replaces the brick with grass
+            tile.setType(TileType.GRASS);
+        }
+
+        ex.propagateExplosion(direction);
     }
 
     private String getImagePathByLevel(int level, int radius) {
@@ -79,7 +110,9 @@ public class Explosion extends Entity implements Sprite2DListener {
 
     @Override
     protected void update() {
-        GamePanel.getInstance().firePropertyChange(Const.pclKeyArea, null, area2D);
+        PositionChangedBundle bundle = new PositionChangedBundle();
+        bundle.area2D = area2D;
+        GamePanel.getInstance().firePropertyChange(Const.pclKeyArea, null, bundle);
     }
 
     @Override
@@ -89,6 +122,6 @@ public class Explosion extends Entity implements Sprite2DListener {
 
     @Override
     public void didEndAnimation() {
-        GamePanel.getInstance().removeEntity(this);
+        this.destroy();
     }
 }
