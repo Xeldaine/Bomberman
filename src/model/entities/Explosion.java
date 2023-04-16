@@ -11,7 +11,6 @@ import utils.enumerations.EntityDirection;
 import utils.enumerations.TileType;
 
 public class Explosion extends Entity implements Sprite2DListener {
-
     private int radius;
     private int level;
 

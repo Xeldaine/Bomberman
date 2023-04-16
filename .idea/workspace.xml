@@ -4,18 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="984ca510-826f-4715-aed2-4abfc8cb419e" name="Changes" comment="added enemies + randomized bricks and enemies on the map + fix bug draw order">
-      <change afterPath="$PROJECT_DIR$/src/utils/MathUtils.java" afterDir="false" />
+    <list default="true" id="984ca510-826f-4715-aed2-4abfc8cb419e" name="Changes" comment="added enemy death + refactor sprite 2D">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Entity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/components/Sprite2D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/components/Sprite2D.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/entities/Bomb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Bomb.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/entities/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Enemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/entities/Explosion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Explosion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/entities/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/entities/TileMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/TileMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/enumerations/EnemyType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/enumerations/EnemyType.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -329,7 +321,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681642453854</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="added enemy death + refactor sprite 2D">
+      <created>1681659973665</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1681659973665</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -367,7 +366,8 @@
     <MESSAGE value="refactor" />
     <MESSAGE value="added chained explosions" />
     <MESSAGE value="added enemies + randomized bricks and enemies on the map + fix bug draw order" />
-    <option name="LAST_COMMIT_MESSAGE" value="added enemies + randomized bricks and enemies on the map + fix bug draw order" />
+    <MESSAGE value="added enemy death + refactor sprite 2D" />
+    <option name="LAST_COMMIT_MESSAGE" value="added enemy death + refactor sprite 2D" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

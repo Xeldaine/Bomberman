@@ -2,8 +2,6 @@ package model.components;
 
 import model.interfaces.Sprite2DListener;
 import utils.ImageUtils;
-import utils.MathUtils;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
