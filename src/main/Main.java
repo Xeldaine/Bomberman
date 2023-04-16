@@ -1,5 +1,7 @@
 package main;
 import UI.GamePanel;
+import utils.Const;
+
 import javax.swing.*;
 
 public class Main {
@@ -7,9 +9,9 @@ public class Main {
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
-        window.setTitle("Bomberman");
+        window.setTitle(Const.gameName);
         GamePanel gamePanel = GamePanel.getInstance();
-        gamePanel.loadMapAndPlayer();
+        gamePanel.loadMap();
         gamePanel.startGame();
         window.add(gamePanel);
         window.pack();

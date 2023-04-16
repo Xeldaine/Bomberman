@@ -7,8 +7,9 @@ import model.components.Sprite2D;
 import utils.Const;
 
 public class Bomb extends Entity {
-    private final int detonationTime = 5000;
+    private int countdown = 3000;
     private long start = 0;
+
     public Bomb(int x, int y) {
         super(x, y);
         int tileSize = GamePanel.originalTileSize;
@@ -19,7 +20,7 @@ public class Bomb extends Entity {
 
     @Override
     protected void update() {
-        if (start > 0 && System.currentTimeMillis() - start > detonationTime) {
+        if (start > 0 && System.currentTimeMillis() - start > countdown) {
             explode();
         }
     }
@@ -29,11 +30,20 @@ public class Bomb extends Entity {
     }
 
     private void explode() {
+        int radius = GamePanel.getInstance().getCurrPlayer().getBombRadius();
         start = 0;
-        Explosion explosion = new Explosion(getWorldX(), getWorldY(), 2, 0);
+        Explosion explosion = new Explosion(getWorldX(), getWorldY(), radius, 0);
         explosion.propagateExplosion();
         GamePanel.getInstance().addEntity(explosion);
         this.destroy();
+    }
+
+    public int getCountdown() {
+        return countdown;
+    }
+
+    public void setCountdown(int countdown) {
+        this.countdown = countdown;
     }
 
     @Override

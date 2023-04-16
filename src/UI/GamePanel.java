@@ -36,12 +36,13 @@ public class GamePanel extends JPanel implements Runnable {
         setFocusable(true);
     }
 
-    public void loadMapAndPlayer() {
-        currPlayer = new Player(tileSize, tileSize);
+    public void loadMap() {
+        currPlayer = new Player(0, 0);
         Camera2D.getInstance().setEntity(currPlayer);
         currTileMap = new TileMap(0, 0);
         currTileMap.loadMap(Const.map01Path);
-        addEntity(currPlayer);
+        currTileMap.disposeBricksAndEnemiesRandomly();
+        currTileMap.disposePlayer(currPlayer);
         addEntity(currTileMap);
     }
 
@@ -138,6 +139,11 @@ public class GamePanel extends JPanel implements Runnable {
 
         // order by priority of which each entity will be drawn on screen
         List<Entity> entitiesToDraw = new ArrayList<>(entities);
+
+        for (Entity entity : entities) {
+            entitiesToDraw.addAll(entity.getFamily());
+        }
+
         entitiesToDraw.sort((e1, e2) -> {
             int prio1 = e1.getSprite2D() != null ? e1.getSprite2D().getPriority() : 0;
             int prio2 = e2.getSprite2D() != null ? e2.getSprite2D().getPriority() : 0;

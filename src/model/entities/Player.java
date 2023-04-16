@@ -8,8 +8,9 @@ import model.Entity;
 import utils.Const;
 
 public class Player extends Entity{
-    private KeyHandler keyHandler;
-    private final int cooldown = 1000; // millis
+    private final KeyHandler keyHandler;
+    private int cooldown = 3000; // millis
+    private int bombRadius = 1;
     private long lastShot = 0;
 
     public Player(int x, int y) {
@@ -32,6 +33,38 @@ public class Player extends Entity{
         }
     }
 
+    public int getCooldown() {
+        return cooldown;
+    }
+
+    public void setCooldown(int cooldown) {
+        this.cooldown = cooldown;
+    }
+
+    public int getBombRadius() {
+        return bombRadius;
+    }
+
+    public void setBombRadius(int bombRadius) {
+        this.bombRadius = bombRadius;
+    }
+
+    public int getSection() {
+        if (this.direction == null) {
+            return 0;
+        }
+
+        int section = 0;
+        switch (this.direction) {
+            case DOWN -> section = 0;
+            case UP ->  section = 1;
+            case RIGHT -> section = 2;
+            case LEFT -> section = 3;
+        }
+
+        return section;
+    }
+
     @Override
     protected void update() {
 
@@ -43,8 +76,8 @@ public class Player extends Entity{
             sprite2D.resetFrameCounter();
 
         } else {
-
             direction = keyHandler.getDirectionByKeyPressed();
+            sprite2D.setSectionIndex(getSection());
 
             switch (direction) {
                 case DOWN -> y += speed;

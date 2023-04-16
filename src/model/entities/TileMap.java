@@ -2,15 +2,20 @@ package model.entities;
 
 import model.Entity;
 import UI.GamePanel;
+import utils.enumerations.EnemyType;
 import utils.enumerations.TileType;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class TileMap extends Entity {
+    private float bricksPercentageRate = 0.3f;
+    private float enemyPercentageRate = 0.1f;
+
     private Tile[][] tilemap;
 
     public TileMap(int x, int y) {
@@ -56,6 +61,22 @@ public class TileMap extends Entity {
         }
     }
 
+    public float getBricksPercentageRate() {
+        return bricksPercentageRate;
+    }
+
+    public void setBricksPercentageRate(float bricksPercentageRate) {
+        this.bricksPercentageRate = bricksPercentageRate;
+    }
+
+    public float getEnemyPercentageRate() {
+        return enemyPercentageRate;
+    }
+
+    public void setEnemyPercentageRate(float enemyPercentageRate) {
+        this.enemyPercentageRate = enemyPercentageRate;
+    }
+
     public Tile getTileByWorldPosition(int worldX, int worldY) {
         int localX = worldX - getWorldX();
         int localY = worldY - getWorldY();
@@ -70,6 +91,56 @@ public class TileMap extends Entity {
         }
 
         return null;
+    }
+
+    public void disposeBricksAndEnemiesRandomly() {
+        for (int j = 0; j < tilemap.length; j++) {
+            Tile[] row = tilemap[j];
+            for (int i = 0; i < row.length; i++) {
+                Tile tile = row[i];
+                if (tile != null && tile.getType() == TileType.GRASS) {
+                    if(Math.random() < bricksPercentageRate) {
+                        tile.setType(TileType.BRICK);
+                    } else if (Math.random() < enemyPercentageRate) {
+                        Enemy enemy = new Enemy(tile.getX(), tile.getY(), EnemyType.generateRandomType());
+                        this.addChild(enemy);
+                    }
+                }
+            }
+        }
+    }
+
+    public List<Tile> getFreeTiles() {
+        ArrayList<Tile> freeTiles = new ArrayList<>();
+        for (int j = 0; j < tilemap.length; j++) {
+            Tile[] row = tilemap[j];
+            for (int i = 0; i < row.length; i++) {
+                Tile tile = row[i];
+                if (tile != null && tile.getType() == TileType.GRASS) {
+                    freeTiles.add(tile);
+                }
+            }
+        }
+
+        return freeTiles;
+    }
+
+    public Tile getRandomFreeTile() {
+        List<Tile> tiles = getFreeTiles();
+        if (tiles.size() == 0) {
+            return null;
+        }
+
+        return tiles.get((int)(Math.random() * (tiles.size() - 1)));
+    }
+
+    public void disposePlayer(Player player) {
+        Tile tile = getRandomFreeTile();
+        if (tile != null) {
+            player.setX(tile.getX());
+            player.setY(tile.getY());
+            this.addChild(player);
+        }
     }
 
     @Override

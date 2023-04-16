@@ -13,6 +13,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public abstract class Entity implements PropertyChangeListener {
@@ -112,6 +113,14 @@ public abstract class Entity implements PropertyChangeListener {
         }
     }
 
+    public ArrayList<Entity> getFamily() {
+        ArrayList<Entity> family = new ArrayList<>(children);
+        for (Entity child: children) {
+            family.addAll(child.getFamily());
+        }
+        return family;
+    }
+
     public final void updateData() {
 
         // sprite drawing
@@ -154,8 +163,7 @@ public abstract class Entity implements PropertyChangeListener {
         // draws the parent
         if (sprite2D != null) {
             int tileSize = GamePanel.tileSize;
-            int section = direction != null ? direction.getSection() : 0;
-            BufferedImage frame = sprite2D.getFrameBySection(section);
+            BufferedImage frame = sprite2D.getCurrentFrame();
 
             int screenX = this.getWorldX() + Camera2D.getInstance().getOffsetX();
             int screenY = this.getWorldY() + Camera2D.getInstance().getOffsetY();
@@ -166,11 +174,6 @@ public abstract class Entity implements PropertyChangeListener {
                 graphics2D.setColor(Const.transparentRed);
                 graphics2D.fillRect(screenX + area2D.x, screenY + area2D.y, area2D.width, area2D.height);
             }
-        }
-
-        // draws the children
-        for (Entity child: children) {
-            child.draw(graphics2D);
         }
     }
 

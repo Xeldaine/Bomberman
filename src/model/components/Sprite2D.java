@@ -16,6 +16,7 @@ public class Sprite2D {
     private int frameCounter = 0; // the current number of frame
     private int spriteNumber = 10; // number of updates between each frame
     private int spriteCounter = 0; // the current number of update
+    private int sectionIndex = 0; // the current index of the section
     private Sprite2DListener listener;
     private int priority = 0;
 
@@ -81,6 +82,14 @@ public class Sprite2D {
         return priority;
     }
 
+    public void setSectionIndex(int sectionIndex) {
+        this.sectionIndex = sectionIndex;
+    }
+
+    public int getSectionIndex() {
+        return sectionIndex;
+    }
+
     public void updateFrameCounter() {
         spriteCounter++;
         if (spriteCounter >= spriteNumber) {
@@ -107,7 +116,7 @@ public class Sprite2D {
         return null;
     }
 
-    public BufferedImage getFrameBySection(int sectionIndex){
+    public BufferedImage getCurrentFrame(){
         return getFrameAt((frameNumber * sectionIndex) + frameCounter);
     }
 }
