@@ -3,6 +3,7 @@ package model.entities;
 import model.Entity;
 import UI.GamePanel;
 import utils.enumerations.EnemyType;
+import utils.enumerations.EntityDirection;
 import utils.enumerations.TileType;
 
 import java.nio.file.Files;
@@ -77,29 +78,31 @@ public class TileMap extends Entity {
         this.enemyPercentageRate = enemyPercentageRate;
     }
 
-    public Tile getTileByWorldPosition(int worldX, int worldY) {
-        int localX = worldX - getWorldX();
-        int localY = worldY - getWorldY();
-        int i = localX / GamePanel.tileSize;
-        int j = localY / GamePanel.tileSize;
-
+    public Tile getTile(int i, int j) {
         if (j >= 0 && j < tilemap.length) {
-            Tile[] line = tilemap[j];
-            if (i >= 0 && i < line.length) {
-                return line[i];
+            Tile[] row = tilemap[j];
+            if (i >= 0 && i < row.length) {
+                return row[i];
             }
         }
 
         return null;
     }
 
+    public Tile getTileByWorldPosition(int worldX, int worldY) {
+        int localX = worldX - getWorldX();
+        int localY = worldY - getWorldY();
+        int i = localX / GamePanel.tileSize;
+        int j = localY / GamePanel.tileSize;
+
+        return getTile(i, j);
+    }
+
     public void disposeBricksAndEnemiesRandomly() {
-        for (int j = 0; j < tilemap.length; j++) {
-            Tile[] row = tilemap[j];
-            for (int i = 0; i < row.length; i++) {
-                Tile tile = row[i];
+        for (Tile[] row : tilemap) {
+            for (Tile tile : row) {
                 if (tile != null && tile.getType() == TileType.GRASS) {
-                    if(Math.random() < bricksPercentageRate) {
+                    if (Math.random() < bricksPercentageRate) {
                         tile.setType(TileType.BRICK);
                     } else if (Math.random() < enemyPercentageRate) {
                         Enemy enemy = new Enemy(tile.getX(), tile.getY(), EnemyType.generateRandomType());
@@ -112,10 +115,8 @@ public class TileMap extends Entity {
 
     public List<Tile> getFreeTiles() {
         ArrayList<Tile> freeTiles = new ArrayList<>();
-        for (int j = 0; j < tilemap.length; j++) {
-            Tile[] row = tilemap[j];
-            for (int i = 0; i < row.length; i++) {
-                Tile tile = row[i];
+        for (Tile[] row : tilemap) {
+            for (Tile tile : row) {
                 if (tile != null && tile.getType() == TileType.GRASS) {
                     freeTiles.add(tile);
                 }
@@ -141,6 +142,36 @@ public class TileMap extends Entity {
             player.setY(tile.getY());
             this.addChild(player);
         }
+    }
+
+    public Tile getAdiacentTilesByDirection(Tile tile, EntityDirection direction) {
+
+        Tile result = null;
+
+        if (direction == null || tile == null) {
+            return result;
+        }
+
+        int i = tile.getX() / GamePanel.tileSize;
+        int j = tile.getY() / GamePanel.tileSize;
+
+        switch (direction) {
+            case DOWN ->  result = getTile(i, j + 1);
+            case UP -> result = getTile(i, j - 1);
+            case RIGHT -> result = getTile(i + 1, j);
+            case LEFT -> result = getTile(i - 1, j);
+        }
+
+        return result;
+    }
+
+    public Tile[] getAdiacentTiles(Tile tile) {
+        Tile[] tiles = new Tile[EntityDirection.values().length];
+        for (int i = 0; i < tiles.length; i++) {
+            tiles[i] = getAdiacentTilesByDirection(tile, EntityDirection.values()[i]);
+        }
+
+        return tiles;
     }
 
     @Override

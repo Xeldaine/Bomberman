@@ -2,6 +2,7 @@ package model.components;
 
 import model.interfaces.Sprite2DListener;
 import utils.ImageUtils;
+import utils.MathUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -11,24 +12,15 @@ import java.util.List;
 
 public class Sprite2D {
     private ArrayList<BufferedImage> spriteSheet;
-    private int frameWidth = 0, frameHeight = 0; // width and height for each frame
-    private int frameNumber = 1; // number of frames for each section
-    private int frameCounter = 0; // the current number of frame
     private int spriteNumber = 10; // number of updates between each frame
     private int spriteCounter = 0; // the current number of update
-    private int sectionIndex = 0; // the current index of the section
-    private Sprite2DListener listener;
-    private int priority = 0;
+    private Sprite2DListener listener; // listener of events
+    private int priority = 0; // priority which defines the order by each sprite is drawn
+    private int animationIndexFrom = 0; // the index where the animation starts
+    private int animationIndexTo = 0; // the index where the animation ends
+    private int currentAnimationIndex = 0; // current index of the animation
 
-    public Sprite2D(int frameWidth, int frameHeight, int frameNumber, String filename) {
-        if (frameWidth > 0 && frameHeight > 0) {
-            this.frameWidth = frameWidth;
-            this.frameHeight = frameHeight;
-        }
-
-        if (frameNumber > 0) {
-            this.frameNumber = frameNumber;
-        }
+    public Sprite2D(int frameWidth, int frameHeight, String filename) {
 
         spriteSheet = new ArrayList<>();
         File file = new File(filename);
@@ -82,30 +74,32 @@ public class Sprite2D {
         return priority;
     }
 
-    public void setSectionIndex(int sectionIndex) {
-        this.sectionIndex = sectionIndex;
-    }
-
-    public int getSectionIndex() {
-        return sectionIndex;
-    }
-
     public void updateFrameCounter() {
         spriteCounter++;
+        if (currentAnimationIndex < animationIndexFrom) {
+            currentAnimationIndex = animationIndexFrom;
+        }
+
         if (spriteCounter >= spriteNumber) {
             if (listener != null) {
                 listener.didChangeFrame();
             }
             spriteCounter -= spriteNumber;
-            frameCounter = (frameCounter + 1) % frameNumber;
-            if(listener != null && frameCounter == 0) {
+
+            currentAnimationIndex++;
+            if(currentAnimationIndex > animationIndexTo) {
+                currentAnimationIndex = animationIndexFrom;
+            }
+
+            if(listener != null && currentAnimationIndex == animationIndexFrom) {
                 listener.didEndAnimation();
             }
         }
     }
 
-    public void resetFrameCounter() {
-        frameCounter = 0;
+    public void setAnimationIndexes(int animationIndexFrom, int animationIndexTo) {
+        this.animationIndexFrom = animationIndexFrom;
+        this.animationIndexTo = animationIndexTo;
     }
 
     public BufferedImage getFrameAt(int index) {
@@ -116,7 +110,7 @@ public class Sprite2D {
         return null;
     }
 
-    public BufferedImage getCurrentFrame(){
-        return getFrameAt((frameNumber * sectionIndex) + frameCounter);
+    public BufferedImage getCurrentFrame() {
+        return getFrameAt(currentAnimationIndex);
     }
 }

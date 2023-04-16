@@ -21,9 +21,10 @@ public class Explosion extends Entity implements Sprite2DListener {
         this.radius = radius;
         this.level = level;
         String path = this.getImagePathByLevel(level, radius);
-        this.sprite2D = new Sprite2D(GamePanel.originalTileSize, GamePanel.originalTileSize, 5, path);
+        this.sprite2D = new Sprite2D(GamePanel.originalTileSize, GamePanel.originalTileSize, path);
         this.sprite2D.setListener(this);
         this.sprite2D.setPriority(3);
+        this.sprite2D.setAnimationIndexes(0, 5);
     }
 
     public void propagateExplosion() {

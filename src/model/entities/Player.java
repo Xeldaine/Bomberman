@@ -6,6 +6,7 @@ import UI.GamePanel;
 import UI.KeyHandler;
 import model.Entity;
 import utils.Const;
+import utils.enumerations.EntityDirection;
 
 public class Player extends Entity{
     private final KeyHandler keyHandler;
@@ -16,8 +17,9 @@ public class Player extends Entity{
     public Player(int x, int y) {
         super(x, y);
         this.keyHandler = GamePanel.getInstance().getKeyHandler();
-        setSprite2D(new Sprite2D(GamePanel.originalTileSize, GamePanel.originalTileSize, 4, Const.bombermanPath));
+        setSprite2D(new Sprite2D(GamePanel.originalTileSize, GamePanel.originalTileSize, Const.bombermanPath));
         this.sprite2D.setPriority(2);
+        this.direction = EntityDirection.DOWN;
         setArea2D(new Area2D(10 * GamePanel.scale, 14 * GamePanel.scale, 12 * GamePanel.scale, 17 * GamePanel.scale, this));
     }
 
@@ -49,22 +51,6 @@ public class Player extends Entity{
         this.bombRadius = bombRadius;
     }
 
-    public int getSection() {
-        if (this.direction == null) {
-            return 0;
-        }
-
-        int section = 0;
-        switch (this.direction) {
-            case DOWN -> section = 0;
-            case UP ->  section = 1;
-            case RIGHT -> section = 2;
-            case LEFT -> section = 3;
-        }
-
-        return section;
-    }
-
     @Override
     protected void update() {
 
@@ -73,17 +59,33 @@ public class Player extends Entity{
         }
 
         if (keyHandler.arrowNotPressed()) {
-            sprite2D.resetFrameCounter();
+            switch (direction) {
+                case DOWN -> sprite2D.setAnimationIndexes(0,0);
+                case UP -> sprite2D.setAnimationIndexes(4,4);
+                case RIGHT -> sprite2D.setAnimationIndexes(8,8);
+                case LEFT -> sprite2D.setAnimationIndexes(12,12);
+            }
 
         } else {
             direction = keyHandler.getDirectionByKeyPressed();
-            sprite2D.setSectionIndex(getSection());
 
             switch (direction) {
-                case DOWN -> y += speed;
-                case UP -> y -= speed;
-                case LEFT -> x -= speed;
-                case RIGHT -> x += speed;
+                case DOWN -> {
+                    y += speed;
+                    sprite2D.setAnimationIndexes(0,3);
+                }
+                case UP -> {
+                    y -= speed;
+                    sprite2D.setAnimationIndexes(4,7);
+                }
+                case RIGHT -> {
+                    x += speed;
+                    sprite2D.setAnimationIndexes(8,11);
+                }
+                case LEFT -> {
+                    x -= speed;
+                    sprite2D.setAnimationIndexes(12,15);
+                }
             }
         }
     }

@@ -21,7 +21,7 @@ public class Tile extends Entity {
 
     public void setType(TileType type) {
         this.type = type;
-        sprite2D = new Sprite2D(GamePanel.originalTileSize, GamePanel.originalTileSize, 1, type.getPath());
+        sprite2D = new Sprite2D(GamePanel.originalTileSize, GamePanel.originalTileSize, type.getPath());
         sprite2D.setPriority(0);
         isCollisionEnabled = type == TileType.WALL || type == TileType.BRICK;
     }

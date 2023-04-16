@@ -122,18 +122,17 @@ public abstract class Entity implements PropertyChangeListener {
     }
 
     public final void updateData() {
-
-        // sprite drawing
-        if (sprite2D != null) {
-            sprite2D.updateFrameCounter();
-        }
-
         PositionChangedBundle oldValue = new PositionChangedBundle();
         oldValue.x = this.x;
         oldValue.y = this.y;
         oldValue.area2D = this.area2D;
 
         this.update();
+
+        // sprite drawing
+        if (sprite2D != null) {
+            sprite2D.updateFrameCounter();
+        }
 
         PositionChangedBundle newValue = new PositionChangedBundle();
         newValue.x = this.x;
@@ -193,6 +192,7 @@ public abstract class Entity implements PropertyChangeListener {
                     if (area.intersectsWithOffset(area2D, offsetX, offsetY)) {
                         area.getEntity().x = oldValue.x;
                         area.getEntity().y = oldValue.y;
+                        area.getEntity().onCollisionHit(area2D);
                     }
 
                 } else if (area2D.intersectsWithOffset(area, 0, 0)) {
@@ -208,6 +208,10 @@ public abstract class Entity implements PropertyChangeListener {
     }
 
     public void onAreaEntered(Area2D area) {
+        //void implementation
+    }
+
+    public void onCollisionHit(Area2D area) {
         //void implementation
     }
 }
