@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="984ca510-826f-4715-aed2-4abfc8cb419e" name="Changes" comment="fix">
+    <list default="true" id="984ca510-826f-4715-aed2-4abfc8cb419e" name="Changes" comment="fix bug piazzamento bombe">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Player.java" afterDir="false" />
     </list>
@@ -348,7 +348,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681803264133</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="fix bug piazzamento bombe">
+      <created>1681803853602</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1681803853602</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -363,7 +370,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="graphics setting" />
     <MESSAGE value="fps log" />
     <MESSAGE value="added assets and refactor" />
     <MESSAGE value="added sprite manager and player animation" />
@@ -388,7 +394,8 @@
     <MESSAGE value="added enemy death + refactor sprite 2D" />
     <MESSAGE value="y sorting" />
     <MESSAGE value="fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix" />
+    <MESSAGE value="fix bug piazzamento bombe" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix bug piazzamento bombe" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

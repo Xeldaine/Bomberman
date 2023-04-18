@@ -70,7 +70,10 @@ public class Player extends Entity{
             }
 
         } else {
-            direction = keyHandler.getDirectionByKeyPressed();
+            EntityDirection newDirection = keyHandler.getDirectionByKeyPressed();
+            if (newDirection != null) {
+                direction = newDirection;
+            }
 
             switch (direction) {
                 case DOWN -> {
