@@ -148,6 +148,14 @@ public class GamePanel extends JPanel implements Runnable {
             int prio1 = e1.getSprite2D() != null ? e1.getSprite2D().getPriority() : 0;
             int prio2 = e2.getSprite2D() != null ? e2.getSprite2D().getPriority() : 0;
 
+            // y sorting
+            if (prio1 == prio2) {
+                int y1 = e1.getWorldY() + (e1.getArea2D() != null ? e1.getArea2D().y : 0);
+                int y2 = e2.getWorldY() + (e2.getArea2D() != null ? e2.getArea2D().y : 0);
+
+                return y1 - y2;
+            }
+
             return prio1 - prio2;
         });
 
