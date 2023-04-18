@@ -153,6 +153,9 @@ public abstract class Entity implements PropertyChangeListener {
         if (parent != null) {
             parent.removeChild(this);
         }
+        for (Entity child: children) {
+            this.removeChild(child);
+        }
         GamePanel.getInstance().removeEntity(this);
     }
 
