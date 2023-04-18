@@ -29,9 +29,12 @@ public class Player extends Entity{
             lastShot = currTime;
             int centerX = getWorldX() + GamePanel.tileSize / 2;
             int centerY = getWorldY() + GamePanel.tileSize / 2;
-            Bomb bomb = new Bomb(centerX - (centerX % GamePanel.tileSize), centerY - (centerY % GamePanel.tileSize));
-            bomb.castExplosion();
-            GamePanel.getInstance().addEntity(bomb);
+            Tile tile = GamePanel.getInstance().getCurrTileMap().getTileByWorldPosition(centerX, centerY);
+            if (tile != null) {
+                Bomb bomb = new Bomb(tile.getX(), tile.getY());
+                GamePanel.getInstance().getCurrTileMap().addChild(bomb);
+                bomb.castExplosion();
+            }
         }
     }
 
