@@ -26,7 +26,7 @@ public class Bomb extends Entity {
         }
     }
 
-    public void castExplosion() {
+    public void startCountdown() {
         start = System.currentTimeMillis();
     }
 

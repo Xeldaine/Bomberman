@@ -33,7 +33,7 @@ public class Player extends Entity{
             if (tile != null) {
                 Bomb bomb = new Bomb(tile.getX(), tile.getY());
                 GamePanel.getInstance().getCurrTileMap().addChild(bomb);
-                bomb.castExplosion();
+                bomb.startCountdown();
             }
         }
     }
