@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="984ca510-826f-4715-aed2-4abfc8cb419e" name="Changes" comment="inserted score label and life label but still not visible (wip)">
+    <list default="true" id="984ca510-826f-4715-aed2-4abfc8cb419e" name="Changes" comment="refactor">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/components/Sprite2D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/components/Sprite2D.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/entities/Bomb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Bomb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/GamePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/entities/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/entities/Explosion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Explosion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -28,6 +26,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2Nt0iRVm1BjmjFpCpbowRmyzDMl" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -374,7 +375,21 @@
       <option name="project" value="LOCAL" />
       <updated>1681902866731</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="refactor">
+      <created>1681930465842</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1681930465842</updated>
+    </task>
+    <task id="LOCAL-00045" summary="refactor">
+      <created>1681930771013</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1681930771013</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -405,7 +420,6 @@
     <MESSAGE value="fix explosion" />
     <MESSAGE value="fix explosion anim" />
     <MESSAGE value="fix explosion + brick added" />
-    <MESSAGE value="refactor" />
     <MESSAGE value="added chained explosions" />
     <MESSAGE value="added enemies + randomized bricks and enemies on the map + fix bug draw order" />
     <MESSAGE value="added enemy death + refactor sprite 2D" />
@@ -414,7 +428,8 @@
     <MESSAGE value="fix bug piazzamento bombe" />
     <MESSAGE value="fix crash" />
     <MESSAGE value="inserted score label and life label but still not visible (wip)" />
-    <option name="LAST_COMMIT_MESSAGE" value="inserted score label and life label but still not visible (wip)" />
+    <MESSAGE value="refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -429,7 +444,7 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/model/entities/Enemy.java</url>
-          <line>46</line>
+          <line>50</line>
           <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>

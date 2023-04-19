@@ -26,8 +26,6 @@ public class GamePanel extends JPanel implements Runnable {
     private TileMap currTileMap;
     private Player currPlayer;
     private final ConcurrentLinkedQueue<Entity> entities = new ConcurrentLinkedQueue<>();
-    private JLabel scoreLabel;
-    private JLabel lifeLeftLabel;
 
     private GamePanel() {
         setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -35,27 +33,7 @@ public class GamePanel extends JPanel implements Runnable {
         setDoubleBuffered(true);
         keyHandler = new KeyHandler();
         addKeyListener(keyHandler);
-        setupLabels();
         setFocusable(true);
-    }
-
-    private void setupLabels() {
-        SpringLayout layout = new SpringLayout();
-        setLayout(layout);
-        scoreLabel = createLabel("SCORE: 0");
-        layout.putConstraint(SpringLayout.WEST, scoreLabel, 20, SpringLayout.WEST, this);
-        layout.putConstraint(SpringLayout.NORTH, scoreLabel, 20, SpringLayout.NORTH, this);
-        lifeLeftLabel = createLabel("LEFT: 0");
-        layout.putConstraint(SpringLayout.EAST, lifeLeftLabel, -20, SpringLayout.EAST, this);
-        layout.putConstraint(SpringLayout.NORTH, lifeLeftLabel, 20, SpringLayout.NORTH, this);
-    }
-
-    private JLabel createLabel(String text) {
-        JLabel label = new JLabel(text, JLabel.LEFT);
-        label.setFont(Const.getFont(Const.emulogicFontPath, Font.BOLD, 14));
-        label.setForeground(Color.white);
-        this.add(label);
-        return label;
     }
 
     public void loadMap() {
@@ -184,6 +162,11 @@ public class GamePanel extends JPanel implements Runnable {
         for (Entity entity: entitiesToDraw) {
             entity.draw(graphics2D);
         }
+
+        graphics2D.setFont(Const.getFont(Const.emulogicFontPath, Font.PLAIN, 18));
+        graphics2D.setColor(Color.white);
+        graphics2D.drawString("SCORE: " + (currPlayer != null ? currPlayer.getScore() : 0) , 30, 30);
+        graphics2D.drawString("LEFT: " + (currPlayer != null ? currPlayer.getLives() : 0), GamePanel.screenWidth - 150, 30);
 
         graphics2D.dispose();
     }

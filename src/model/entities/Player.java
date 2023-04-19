@@ -13,6 +13,8 @@ public class Player extends Entity{
     private int cooldown = 3000; // millis
     private int bombRadius = 1;
     private long lastShot = 0;
+    private int score = 0;
+    private int lives = 3;
 
     public Player(int x, int y) {
         super(x, y);
@@ -52,6 +54,22 @@ public class Player extends Entity{
 
     public void setBombRadius(int bombRadius) {
         this.bombRadius = bombRadius;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getLives() {
+        return lives;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
     }
 
     @Override
