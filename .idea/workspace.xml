@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="984ca510-826f-4715-aed2-4abfc8cb419e" name="Changes" comment="fix bug piazzamento bombe">
+    <list default="true" id="984ca510-826f-4715-aed2-4abfc8cb419e" name="Changes" comment="fix crash">
+      <change afterPath="$PROJECT_DIR$/res/fonts/Emulogic-zrEw.ttf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/Const.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Const.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,11 +43,12 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.general&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/res/fonts" />
       <recent name="$PROJECT_DIR$/res/sprites" />
       <recent name="$PROJECT_DIR$/res" />
     </key>
@@ -355,7 +358,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681803853602</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="fix crash">
+      <created>1681804491717</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1681804491717</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -370,7 +380,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fps log" />
     <MESSAGE value="added assets and refactor" />
     <MESSAGE value="added sprite manager and player animation" />
     <MESSAGE value="tileset and maps" />
@@ -395,7 +404,8 @@
     <MESSAGE value="y sorting" />
     <MESSAGE value="fix" />
     <MESSAGE value="fix bug piazzamento bombe" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix bug piazzamento bombe" />
+    <MESSAGE value="fix crash" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix crash" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

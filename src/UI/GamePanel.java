@@ -26,14 +26,36 @@ public class GamePanel extends JPanel implements Runnable {
     private TileMap currTileMap;
     private Player currPlayer;
     private final ConcurrentLinkedQueue<Entity> entities = new ConcurrentLinkedQueue<>();
+    private JLabel scoreLabel;
+    private JLabel lifeLeftLabel;
 
     private GamePanel() {
         setPreferredSize(new Dimension(screenWidth, screenHeight));
-        setBackground(Color.black);
+        setBackground(Const.backgroundGrey);
         setDoubleBuffered(true);
         keyHandler = new KeyHandler();
         addKeyListener(keyHandler);
+        setupLabels();
         setFocusable(true);
+    }
+
+    private void setupLabels() {
+        SpringLayout layout = new SpringLayout();
+        setLayout(layout);
+        scoreLabel = createLabel("SCORE: 0");
+        layout.putConstraint(SpringLayout.WEST, scoreLabel, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.NORTH, scoreLabel, 20, SpringLayout.NORTH, this);
+        lifeLeftLabel = createLabel("LEFT: 0");
+        layout.putConstraint(SpringLayout.EAST, lifeLeftLabel, -20, SpringLayout.EAST, this);
+        layout.putConstraint(SpringLayout.NORTH, lifeLeftLabel, 20, SpringLayout.NORTH, this);
+    }
+
+    private JLabel createLabel(String text) {
+        JLabel label = new JLabel(text, JLabel.LEFT);
+        label.setFont(Const.getFont(Const.emulogicFontPath, Font.BOLD, 14));
+        label.setForeground(Color.white);
+        this.add(label);
+        return label;
     }
 
     public void loadMap() {

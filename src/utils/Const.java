@@ -3,6 +3,8 @@ package utils;
 import UI.GamePanel;
 
 import java.awt.*;
+import java.io.IOException;
+import java.util.Objects;
 
 public abstract class Const {
     public static final String gameName = "Bomberman";
@@ -27,6 +29,23 @@ public abstract class Const {
 
     // colors
     public static final Color transparentRed = new Color(1, 0, 0, 0.5f);
+    public static final Color backgroundGrey = new Color(132/255f, 126/255f, 135/255f);
+
+    // fonts
+    public static final String baseFontsPath = "/fonts";
+    public static String emulogicFontPath = baseFontsPath + "/Emulogic-zrEw.ttf";
+
+    public static Font getFont(String fontName, int style, int size) {
+        try {
+            Font font = Font.createFont(Font.TRUETYPE_FONT, Objects.requireNonNull(Const.class.getResourceAsStream(fontName)));
+            return font.deriveFont(style, size);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
     // values
     public static final int defaultSpeed = 2 * GamePanel.scale;
