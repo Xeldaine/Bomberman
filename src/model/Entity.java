@@ -167,11 +167,18 @@ public abstract class Entity implements PropertyChangeListener {
             int tileSize = GamePanel.tileSize;
             BufferedImage frame = sprite2D.getCurrentFrame();
 
+            // camera shift
             int screenX = this.getWorldX() + Camera2D.getInstance().getOffsetX();
             int screenY = this.getWorldY() + Camera2D.getInstance().getOffsetY();
 
+            // opacity
+            AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, sprite2D.getAlpha());
+            graphics2D.setComposite(ac);
+
+            // drawing
             graphics2D.drawImage(frame, screenX, screenY, tileSize, tileSize, null);
 
+            // debug
             if (area2D != null && Config.visibleAreas) {
                 graphics2D.setColor(Const.transparentRed);
                 graphics2D.fillRect(screenX + area2D.x, screenY + area2D.y, area2D.width, area2D.height);

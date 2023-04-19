@@ -10,13 +10,14 @@ import java.util.List;
 
 public class Sprite2D {
     private ArrayList<BufferedImage> spriteSheet;
-    private int spriteNumber = 10; // number of updates between each frame
+    private final int spriteNumber = 10; // number of updates between each frame
     private int spriteCounter = 0; // the current number of update
     private Sprite2DListener listener; // listener of events
     private int priority = 0; // priority which defines the order by each sprite is drawn
     private int animationIndexFrom = 0; // the index where the animation starts
     private int animationIndexTo = 0; // the index where the animation ends
     private int currentAnimationIndex = 0; // current index of the animation
+    private float alpha = 1; // alpha value of the images
 
     public Sprite2D(int frameWidth, int frameHeight, String filename) {
 
@@ -95,6 +96,14 @@ public class Sprite2D {
         }
     }
 
+    public void setAlpha(float alpha) {
+        this.alpha = alpha;
+    }
+
+    public float getAlpha() {
+        return alpha;
+    }
+
     public void setAnimationIndexRange(int animationIndexFrom, int animationIndexTo) {
         this.animationIndexFrom = animationIndexFrom;
         this.animationIndexTo = animationIndexTo;
@@ -102,7 +111,8 @@ public class Sprite2D {
 
     public BufferedImage getFrameAt(int index) {
         if (index < spriteSheet.size()) {
-            return spriteSheet.get(index);
+            BufferedImage image = spriteSheet.get(index);
+            return image;
         }
 
         return null;

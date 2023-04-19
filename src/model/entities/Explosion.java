@@ -121,6 +121,20 @@ public class Explosion extends Entity implements Sprite2DListener {
     }
 
     @Override
+    public void onAreaEntered(Area2D area) {
+        super.onAreaEntered(area);
+
+        if (area.getEntity() instanceof Enemy) {
+            Enemy enemy = (Enemy) area.getEntity();
+            enemy.kill();
+
+        } else if (area.getEntity() instanceof Bomb) {
+            Bomb bomb = (Bomb) area.getEntity();
+            bomb.explode();
+        }
+    }
+
+    @Override
     public void didEndAnimation() {
         this.destroy();
     }

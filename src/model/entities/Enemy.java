@@ -54,13 +54,15 @@ public class Enemy extends Entity implements Sprite2DListener {
         }
     }
 
-    private void startAnimationDeath() {
-        this.dead = true;
-        sprite2D.setPriority(5);
-        sprite2D.setListener(this);
-        Player player = GamePanel.getInstance().getCurrPlayer();
-        if (player != null) {
-            player.setScore(player.getScore() + points);
+    public void kill() {
+        if(!dead) {
+            this.dead = true;
+            sprite2D.setPriority(5);
+            sprite2D.setListener(this);
+            Player player = GamePanel.getInstance().getCurrPlayer();
+            if (player != null) {
+                player.setScore(player.getScore() + points);
+            }
         }
     }
 
@@ -105,14 +107,6 @@ public class Enemy extends Entity implements Sprite2DListener {
     public void onCollisionHit(Area2D area) {
         super.onCollisionHit(area);
         changeDirection();
-    }
-
-    @Override
-    public void onAreaEntered(Area2D area) {
-        super.onAreaEntered(area);
-        if (area.getEntity() instanceof Explosion && !dead) {
-            startAnimationDeath();
-        }
     }
 
     @Override

@@ -30,7 +30,7 @@ public class Bomb extends Entity {
         start = System.currentTimeMillis();
     }
 
-    private void explode() {
+    public void explode() {
         int radius = GamePanel.getInstance().getCurrPlayer().getBombRadius();
         start = 0;
         Explosion explosion = new Explosion(getWorldX(), getWorldY(), radius, 0);
@@ -45,13 +45,5 @@ public class Bomb extends Entity {
 
     public void setCountdown(int countdown) {
         this.countdown = countdown;
-    }
-
-    @Override
-    public void onAreaEntered(Area2D area) {
-        super.onAreaEntered(area);
-        if (area.getEntity() instanceof Explosion) {
-            explode();
-        }
     }
 }

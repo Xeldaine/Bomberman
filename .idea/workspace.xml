@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="984ca510-826f-4715-aed2-4abfc8cb419e" name="Changes" comment="refactor">
+    <list default="true" id="984ca510-826f-4715-aed2-4abfc8cb419e" name="Changes" comment="fix labels + score system">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/components/Sprite2D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/components/Sprite2D.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/entities/Bomb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Bomb.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/entities/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/entities/Explosion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Explosion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/MathUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/MathUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -389,7 +393,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681930771013</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="fix labels + score system">
+      <created>1681937823027</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1681937823027</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -404,7 +415,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added sprite manager and player animation" />
     <MESSAGE value="tileset and maps" />
     <MESSAGE value="implemented camera movement" />
     <MESSAGE value="collision detection (wip, doesn't work fine yet)" />
@@ -429,7 +439,8 @@
     <MESSAGE value="fix crash" />
     <MESSAGE value="inserted score label and life label but still not visible (wip)" />
     <MESSAGE value="refactor" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor" />
+    <MESSAGE value="fix labels + score system" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix labels + score system" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -6,15 +6,21 @@ import UI.GamePanel;
 import UI.KeyHandler;
 import model.Entity;
 import utils.Const;
+import utils.MathUtils;
+import utils.enumerations.EnemyType;
 import utils.enumerations.EntityDirection;
 
 public class Player extends Entity{
     private final KeyHandler keyHandler;
     private int cooldown = 3000; // millis
+    private int invincibilityFrame = 3000; // millis
     private int bombRadius = 1;
-    private long lastShot = 0;
+    private long lastSetBomb = 0;
+    private long lastDamaged = 0;
     private int score = 0;
     private int lives = 3;
+
+    private float deltaAlpha = -0.1f;
 
     public Player(int x, int y) {
         super(x, y);
@@ -27,8 +33,8 @@ public class Player extends Entity{
 
     private void setBomb() {
         long currTime = System.currentTimeMillis();
-        if (currTime - lastShot > cooldown) {
-            lastShot = currTime;
+        if (currTime - lastSetBomb > cooldown) {
+            lastSetBomb = currTime;
             int centerX = getWorldX() + GamePanel.tileSize / 2;
             int centerY = getWorldY() + GamePanel.tileSize / 2;
             Tile tile = GamePanel.getInstance().getCurrTileMap().getTileByWorldPosition(centerX, centerY);
@@ -40,12 +46,27 @@ public class Player extends Entity{
         }
     }
 
+    public void damage() {
+        if (lastDamaged == 0) {
+            lastDamaged = System.currentTimeMillis();
+            lives--;
+        }
+    }
+
     public int getCooldown() {
         return cooldown;
     }
 
     public void setCooldown(int cooldown) {
         this.cooldown = cooldown;
+    }
+
+    public int getInvincibilityFrame() {
+        return invincibilityFrame;
+    }
+
+    public void setInvincibilityFrame(int invincibilityFrame) {
+        this.invincibilityFrame = invincibilityFrame;
     }
 
     public int getBombRadius() {
@@ -68,15 +89,28 @@ public class Player extends Entity{
         return lives;
     }
 
-    public void setLives(int lives) {
-        this.lives = lives;
-    }
-
     @Override
     protected void update() {
 
         if (keyHandler.spacePressed) {
             setBomb();
+        }
+
+        if (lastDamaged > 0) {
+            if (System.currentTimeMillis() - lastDamaged > invincibilityFrame) {
+                lastDamaged = 0;
+                sprite2D.setAlpha(1);
+
+            } else {
+                float alpha = sprite2D.getAlpha();
+                if (alpha == 1) {
+                    deltaAlpha = -0.05f;
+
+                } else if(alpha <= 0.5f) {
+                    deltaAlpha = 0.05f;
+                }
+                sprite2D.setAlpha(MathUtils.clamp(0.5f, 1, alpha + deltaAlpha));
+            }
         }
 
         if (keyHandler.arrowNotPressed()) {
@@ -105,6 +139,9 @@ public class Player extends Entity{
     @Override
     public void onAreaEntered(Area2D area) {
         super.onAreaEntered(area);
-        System.out.println("area entered!!");
+
+        if (area.getEntity() instanceof Explosion || area.getEntity() instanceof Enemy) {
+            damage();
+        }
     }
 }
