@@ -63,10 +63,10 @@ public class Player extends Entity{
 
         if (keyHandler.arrowNotPressed()) {
             switch (direction) {
-                case DOWN -> sprite2D.setAnimationIndexes(0,0);
-                case UP -> sprite2D.setAnimationIndexes(4,4);
-                case RIGHT -> sprite2D.setAnimationIndexes(8,8);
-                case LEFT -> sprite2D.setAnimationIndexes(12,12);
+                case DOWN -> sprite2D.setAnimationIndexRange(0,0);
+                case UP -> sprite2D.setAnimationIndexRange(4,4);
+                case RIGHT -> sprite2D.setAnimationIndexRange(8,8);
+                case LEFT -> sprite2D.setAnimationIndexRange(12,12);
             }
 
         } else {
@@ -76,22 +76,10 @@ public class Player extends Entity{
             }
 
             switch (direction) {
-                case DOWN -> {
-                    y += speed;
-                    sprite2D.setAnimationIndexes(0,3);
-                }
-                case UP -> {
-                    y -= speed;
-                    sprite2D.setAnimationIndexes(4,7);
-                }
-                case RIGHT -> {
-                    x += speed;
-                    sprite2D.setAnimationIndexes(8,11);
-                }
-                case LEFT -> {
-                    x -= speed;
-                    sprite2D.setAnimationIndexes(12,15);
-                }
+                case DOWN -> { y += speed; sprite2D.setAnimationIndexRange(0,3); }
+                case UP -> { y -= speed; sprite2D.setAnimationIndexRange(4,7); }
+                case RIGHT -> {  x += speed; sprite2D.setAnimationIndexRange(8,11); }
+                case LEFT -> { x -= speed; sprite2D.setAnimationIndexRange(12,15); }
             }
         }
     }

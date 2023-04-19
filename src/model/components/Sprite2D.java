@@ -95,7 +95,7 @@ public class Sprite2D {
         }
     }
 
-    public void setAnimationIndexes(int animationIndexFrom, int animationIndexTo) {
+    public void setAnimationIndexRange(int animationIndexFrom, int animationIndexTo) {
         this.animationIndexFrom = animationIndexFrom;
         this.animationIndexTo = animationIndexTo;
     }

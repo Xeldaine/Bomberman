@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="984ca510-826f-4715-aed2-4abfc8cb419e" name="Changes" comment="fix crash">
-      <change afterPath="$PROJECT_DIR$/res/fonts/Emulogic-zrEw.ttf" afterDir="false" />
+    <list default="true" id="984ca510-826f-4715-aed2-4abfc8cb419e" name="Changes" comment="inserted score label and life label but still not visible (wip)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/Const.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Const.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/components/Sprite2D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/components/Sprite2D.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/entities/Bomb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Bomb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/entities/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/entities/Explosion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Explosion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -365,7 +367,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681804491717</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="inserted score label and life label but still not visible (wip)">
+      <created>1681902866731</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1681902866731</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -380,7 +389,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added assets and refactor" />
     <MESSAGE value="added sprite manager and player animation" />
     <MESSAGE value="tileset and maps" />
     <MESSAGE value="implemented camera movement" />
@@ -405,7 +413,8 @@
     <MESSAGE value="fix" />
     <MESSAGE value="fix bug piazzamento bombe" />
     <MESSAGE value="fix crash" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix crash" />
+    <MESSAGE value="inserted score label and life label but still not visible (wip)" />
+    <option name="LAST_COMMIT_MESSAGE" value="inserted score label and life label but still not visible (wip)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -420,7 +429,7 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/model/entities/Enemy.java</url>
-          <line>58</line>
+          <line>46</line>
           <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>

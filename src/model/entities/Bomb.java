@@ -15,7 +15,7 @@ public class Bomb extends Entity {
         int tileSize = GamePanel.originalTileSize;
         this.sprite2D = new Sprite2D(tileSize, tileSize, Const.bombPath);
         this.sprite2D.setPriority(1);
-        this.sprite2D.setAnimationIndexes(0, 1);
+        this.sprite2D.setAnimationIndexRange(0, 1);
         this.area2D = new Area2D(7 * GamePanel.scale, 11 * GamePanel.scale, 18 * GamePanel.scale, 18 * GamePanel.scale, this);
     }
 

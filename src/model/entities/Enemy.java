@@ -37,27 +37,15 @@ public class Enemy extends Entity implements Sprite2DListener {
         if (!dead) {
             // the enemy is not dead so it can move
             switch (direction) {
-                case DOWN -> {
-                    y += speed;
-                    sprite2D.setAnimationIndexes(0, 1);
-                }
-                case UP -> {
-                    y -= speed;
-                    sprite2D.setAnimationIndexes(0, 1);
-                }
-                case LEFT -> {
-                    x -= speed;
-                    sprite2D.setAnimationIndexes(0, 1);
-                }
-                case RIGHT -> {
-                    x += speed;
-                    sprite2D.setAnimationIndexes(2, 3);
-                }
+                case DOWN -> { y += speed; sprite2D.setAnimationIndexRange(0, 1); }
+                case UP -> { y -= speed; sprite2D.setAnimationIndexRange(0, 1); }
+                case LEFT -> { x -= speed; sprite2D.setAnimationIndexRange(0, 1);}
+                case RIGHT -> { x += speed; sprite2D.setAnimationIndexRange(2, 3); }
             }
         } else {
             switch (direction) {
-                case UP, DOWN, LEFT -> sprite2D.setAnimationIndexes(4, 6);
-                case RIGHT -> sprite2D.setAnimationIndexes(7, 9);
+                case UP, DOWN, LEFT -> sprite2D.setAnimationIndexRange(4, 6);
+                case RIGHT -> sprite2D.setAnimationIndexRange(7, 9);
             }
         }
     }
