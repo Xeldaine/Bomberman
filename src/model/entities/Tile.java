@@ -12,6 +12,7 @@ public class Tile extends Entity {
     public Tile(int x, int y, TileType type) {
         super(x, y);
         setType(type);
+        setStatic(true);
         area2D = new Area2D(0, 0, GamePanel.tileSize, GamePanel.tileSize, this);
     }
 

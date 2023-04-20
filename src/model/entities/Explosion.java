@@ -109,22 +109,20 @@ public class Explosion extends Entity implements Sprite2DListener {
     }
 
     @Override
-    protected void update() {
-        PositionChangedBundle bundle = new PositionChangedBundle();
-        bundle.area2D = area2D;
-        GamePanel.getInstance().firePropertyChange(Const.pclKeyArea, null, bundle);
-    }
+    protected void update() {}
 
     @Override
-    public void didChangeFrame() {
-
-    }
+    public void didChangeFrame() {}
 
     @Override
     public void onAreaEntered(Area2D area) {
         super.onAreaEntered(area);
 
-        if (area.getEntity() instanceof Enemy) {
+        if (area.getEntity() instanceof Player) {
+            Player player = (Player) area.getEntity();
+            player.damage();
+
+        } else if (area.getEntity() instanceof Enemy) {
             Enemy enemy = (Enemy) area.getEntity();
             enemy.kill();
 

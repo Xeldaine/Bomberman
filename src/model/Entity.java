@@ -25,6 +25,7 @@ public abstract class Entity implements PropertyChangeListener {
     protected Area2D area2D;
     protected EntityDirection direction;
     public Boolean isCollisionEnabled = false;
+    public Boolean isStatic = false;
 
     public Entity(int x, int y) {
         this.x = x;
@@ -59,6 +60,14 @@ public abstract class Entity implements PropertyChangeListener {
     public int getWorldY() {
         int parentY = parent != null ? parent.getWorldY() : 0;
         return parentY + this.y;
+    }
+
+    public Boolean getStatic() {
+        return isStatic;
+    }
+
+    public void setStatic(Boolean aStatic) {
+        isStatic = aStatic;
     }
 
     public int getSpeed() {
@@ -140,7 +149,7 @@ public abstract class Entity implements PropertyChangeListener {
         newValue.area2D = this.area2D;
 
         //collision check
-        if (newValue.x != oldValue.x || newValue.y != oldValue.y) {
+        if (!isStatic) {
             GamePanel.getInstance().firePropertyChange(Const.pclKeyArea, oldValue, newValue);
         }
 

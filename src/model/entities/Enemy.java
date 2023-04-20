@@ -118,4 +118,15 @@ public class Enemy extends Entity implements Sprite2DListener {
     public void didEndAnimation() {
         this.destroy();
     }
+
+    @Override
+    public void onAreaEntered(Area2D area) {
+        super.onAreaEntered(area);
+
+        if (area.getEntity() instanceof Player) {
+            Player player = (Player) area.getEntity();
+            player.damage();
+
+        }
+    }
 }

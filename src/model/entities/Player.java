@@ -135,13 +135,4 @@ public class Player extends Entity{
             }
         }
     }
-
-    @Override
-    public void onAreaEntered(Area2D area) {
-        super.onAreaEntered(area);
-
-        if (area.getEntity() instanceof Explosion || area.getEntity() instanceof Enemy) {
-            damage();
-        }
-    }
 }
