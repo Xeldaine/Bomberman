@@ -6,7 +6,6 @@ import model.components.Area2D;
 import model.components.Sprite2D;
 import model.interfaces.Sprite2DListener;
 import utils.Const;
-import utils.classes.PositionChangedBundle;
 import utils.enumerations.EntityDirection;
 import utils.enumerations.TileType;
 

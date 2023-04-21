@@ -5,6 +5,9 @@ import model.Entity;
 import model.components.Area2D;
 import model.components.Sprite2D;
 import utils.Const;
+import utils.classes.PositionChangedBundle;
+
+import java.beans.PropertyChangeEvent;
 
 public class Bomb extends Entity {
     private int countdown = 3000;
@@ -12,9 +15,10 @@ public class Bomb extends Entity {
 
     public Bomb(int x, int y) {
         super(x, y);
+        this.isCollisionEnabled = true;
         int tileSize = GamePanel.originalTileSize;
         this.sprite2D = new Sprite2D(tileSize, tileSize, Const.bombPath);
-        this.sprite2D.setPriority(1);
+        this.sprite2D.setPriority(2);
         this.sprite2D.setAnimationIndexRange(0, 1);
         this.area2D = new Area2D(7 * GamePanel.scale, 11 * GamePanel.scale, 18 * GamePanel.scale, 18 * GamePanel.scale, this);
     }
@@ -45,5 +49,15 @@ public class Bomb extends Entity {
 
     public void setCountdown(int countdown) {
         this.countdown = countdown;
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if(evt.getPropertyName().equals(Const.pclKeyArea)) {
+            PositionChangedBundle newValue = (PositionChangedBundle) evt.getNewValue();
+            if(newValue.area2D != null && !(newValue.area2D.getEntity() instanceof Player)) {
+                super.propertyChange(evt);
+            }
+        }
     }
 }

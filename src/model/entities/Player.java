@@ -7,7 +7,6 @@ import UI.KeyHandler;
 import model.Entity;
 import utils.Const;
 import utils.MathUtils;
-import utils.enumerations.EnemyType;
 import utils.enumerations.EntityDirection;
 
 public class Player extends Entity{

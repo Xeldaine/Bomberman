@@ -17,15 +17,15 @@ import java.util.ArrayList;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public abstract class Entity implements PropertyChangeListener {
-    private Entity parent;
+    protected Entity parent;
     private final ConcurrentLinkedQueue<Entity> children = new ConcurrentLinkedQueue<>();
     protected int x, y; // position of the entity relative to parent (if parent == null, they represent world coordinates)
     protected int speed = Const.defaultSpeed;
     protected Sprite2D sprite2D;
     protected Area2D area2D;
     protected EntityDirection direction;
-    public Boolean isCollisionEnabled = false;
-    public Boolean isStatic = false;
+    protected Boolean isCollisionEnabled = false;
+    protected Boolean isStatic = false;
 
     public Entity(int x, int y) {
         this.x = x;
@@ -68,6 +68,14 @@ public abstract class Entity implements PropertyChangeListener {
 
     public void setStatic(Boolean aStatic) {
         isStatic = aStatic;
+    }
+
+    public void setCollisionEnabled(Boolean collisionEnabled) {
+        isCollisionEnabled = collisionEnabled;
+    }
+
+    public Boolean getCollisionEnabled() {
+        return isCollisionEnabled;
     }
 
     public int getSpeed() {
@@ -203,15 +211,17 @@ public abstract class Entity implements PropertyChangeListener {
             Area2D area = newValue.area2D;
 
             if (area != null && area2D != null && area.getEntity() != this) {
-                if (isCollisionEnabled && oldValue != null) {
+                if (isCollisionEnabled) {
                     // handles collisions
-                    int offsetX = newValue.x - oldValue.x;
-                    int offsetY = newValue.y - oldValue.y;
+                    if (oldValue != null) {
+                        int offsetX = newValue.x - oldValue.x;
+                        int offsetY = newValue.y - oldValue.y;
 
-                    if (area.intersectsWithOffset(area2D, offsetX, offsetY)) {
-                        area.getEntity().x = oldValue.x;
-                        area.getEntity().y = oldValue.y;
-                        area.getEntity().onCollisionHit(area2D);
+                        if (area.intersectsWithOffset(area2D, offsetX, offsetY)) {
+                            area.getEntity().x = oldValue.x;
+                            area.getEntity().y = oldValue.y;
+                            area.getEntity().onCollisionHit(area2D);
+                        }
                     }
 
                 } else if (area2D.intersectsWithOffset(area, 0, 0)) {

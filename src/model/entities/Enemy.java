@@ -126,7 +126,6 @@ public class Enemy extends Entity implements Sprite2DListener {
         if (area.getEntity() instanceof Player) {
             Player player = (Player) area.getEntity();
             player.damage();
-
         }
     }
 }

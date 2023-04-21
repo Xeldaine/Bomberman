@@ -21,6 +21,7 @@ public class TileMap extends Entity {
 
     public TileMap(int x, int y) {
         super(x, y);
+        this.isStatic = true;
     }
 
     public void loadMap(String filepath) {

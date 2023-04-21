@@ -4,13 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="984ca510-826f-4715-aed2-4abfc8cb419e" name="Changes" comment="damage system">
+    <list default="true" id="984ca510-826f-4715-aed2-4abfc8cb419e" name="Changes" comment="refactor">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/entities/Bomb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Bomb.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/entities/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Enemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/entities/Explosion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Explosion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/entities/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/entities/TileMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/TileMap.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -405,7 +406,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681946209570</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="refactor">
+      <created>1682016720821</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1682016720821</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -442,10 +450,10 @@
     <MESSAGE value="fix bug piazzamento bombe" />
     <MESSAGE value="fix crash" />
     <MESSAGE value="inserted score label and life label but still not visible (wip)" />
-    <MESSAGE value="refactor" />
     <MESSAGE value="fix labels + score system" />
     <MESSAGE value="damage system" />
-    <option name="LAST_COMMIT_MESSAGE" value="damage system" />
+    <MESSAGE value="refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
